@@ -8,7 +8,7 @@ namespace QLQTT.Models
         public string MaSv { get; set; }
         public string MaQtt { get; set; }
         public string MaKc { get; set; }
-        public bool TrangThaiMat { get; set; }
+        public string TrangThai { get; set; }
 
         public virtual KichCo MaKcNavigation { get; set; }
         public virtual QuanTuTrang MaQttNavigation { get; set; }

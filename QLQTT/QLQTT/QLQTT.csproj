@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{630CA531-270E-4BD1-93B0-DF3D020F6D7D}</ProjectGuid>
+    <ProjectGuid>{D9F15FD9-4295-44EB-A864-BD19A4AC8F4A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>QLQTT</RootNamespace>
     <AssemblyName>QLQTT</AssemblyName>
@@ -168,15 +168,17 @@
       <DependentUpon>MainStudent.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\ChiTietQtt.cs" />
+    <Compile Include="Models\CongNo.cs" />
     <Compile Include="Models\DangMuon.cs" />
     <Compile Include="Models\HoaDonDoi.cs" />
     <Compile Include="Models\HoaDonMuon.cs" />
     <Compile Include="Models\HoaDonThanhToan.cs" />
     <Compile Include="Models\KhoaHoc.cs" />
-    <Compile Include="Models\KhoanNo.cs" />
     <Compile Include="Models\KichCo.cs" />
     <Compile Include="Models\QLQTTContext.cs" />
     <Compile Include="Models\QuanTuTrang.cs" />
+    <Compile Include="Models\SelectedBorrowedQTT.cs" />
+    <Compile Include="Models\SelectedQTT.cs" />
     <Compile Include="Models\SinhVien.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

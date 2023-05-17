@@ -77,29 +77,28 @@
             </TabItem>
             <TabItem Header="Danh sách quân tư trang">
                 <Grid>
-                    <DataGrid x:Name="dtgDS" AutoGenerateColumns="False"
-                              AlternatingRowBackground="AntiqueWhite"
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.5*"/>
+                        <RowDefinition Height="0.5*"/>
+                    </Grid.RowDefinitions>
+                    <DataGrid x:Name="dtgDS" AutoGenerateColumns="False" Margin="0, 5, 0, 0"
+                              AlternatingRowBackground="AntiqueWhite" Grid.Row="0"
                               CanUserAddRows="False" Loaded="dtgDS_Loaded">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Quân tư trang" Binding="{Binding TenQtt}"/>
-                            <DataGridTextColumn Header="Kích cỡ" Binding="{Binding TenKc}"/>
-                            <DataGridTextColumn Header="Trạng thái" Binding="{Binding ttm}"/>
-                            <DataGridTemplateColumn>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Content="Báo mất"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button Content="Đổi"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Quân tư trang" Binding="{Binding qtt.TenQtt}"/>
+                            <DataGridTextColumn Header="Kích cỡ" Binding="{Binding kc.TenKc}"/>
+                            <DataGridTextColumn Header="Trạng thái" Binding="{Binding tt}"/>
+                            <DataGridCheckBoxColumn Header="Chọn" Binding="{Binding isChecked}"/>
                         </DataGrid.Columns>
                     </DataGrid>
+                    <Button x:Name="btnBM" Content="Báo mất" Padding="5, 5, 5, 5" Width="80"
+                            HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="0"
+                            Margin="0, 0, 200, 10" FontSize="14" Click="btnBM_Click"/>
+                    <Button x:Name="btnDoi" Content="Đổi" Padding="5, 5, 5, 5" Width="80"
+                            HorizontalAlignment="Center" VerticalAlignment="Bottom" Grid.Row="0"
+                            Margin="200, 0, 0, 10" FontSize="14" Click="btnDoi_Click"/>
+                    <Label HorizontalAlignment="Center" VerticalAlignment="Top"
+                           Grid.Row="1" Content="Đang chờ đổi / mượn" FontSize="16" FontWeight="Bold"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Lịch sử giao dịch">

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.33529.622
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QLQTT", "QLQTT\QLQTT.csproj", "{630CA531-270E-4BD1-93B0-DF3D020F6D7D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QLQTT", "QLQTT\QLQTT.csproj", "{D9F15FD9-4295-44EB-A864-BD19A4AC8F4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{630CA531-270E-4BD1-93B0-DF3D020F6D7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{630CA531-270E-4BD1-93B0-DF3D020F6D7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{630CA531-270E-4BD1-93B0-DF3D020F6D7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{630CA531-270E-4BD1-93B0-DF3D020F6D7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9F15FD9-4295-44EB-A864-BD19A4AC8F4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9F15FD9-4295-44EB-A864-BD19A4AC8F4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9F15FD9-4295-44EB-A864-BD19A4AC8F4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9F15FD9-4295-44EB-A864-BD19A4AC8F4A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {3BDA3E00-9719-40B5-9833-C43D175ADB12}
+		SolutionGuid = {637B6722-7DE7-4DB6-ADAD-B8862AB6684B}
 	EndGlobalSection
 EndGlobal

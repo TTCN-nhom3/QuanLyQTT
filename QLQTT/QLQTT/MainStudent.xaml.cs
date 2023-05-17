@@ -38,65 +38,6 @@ namespace QLQTT
             this.sv = q.First();
         }
 
-        //public void showDK()
-        //{
-
-        //}
-
-        //public void showDS(string id)
-        //{
-        //    var list = from d in db.DangMuon
-        //               join q in db.QuanTuTrang on d.MaQtt equals q.MaQtt
-        //               join k in db.KichCo on d.MaKc equals k.MaKc
-        //               where d.MaSv == id
-        //               let ttm = (d.TrangThaiMat) ? "Đang mất" : "Đang mượn"
-        //               select new
-        //               {
-        //                   q.MaQtt,
-        //                   q.TenQtt,
-        //                   k.MaKc,
-        //                   k.TenKc,
-        //                   ttm
-        //               };
-        //    dtgDS.ItemsSource = list.ToList();
-        //}
-
-        //public void showHD(string id)
-        //{
-        //    var hd = from m in db.HoaDonMuon
-        //             join q in db.QuanTuTrang on m.MaQtt equals q.MaQtt
-        //             join k in db.KichCo on m.MaKc equals k.MaKc
-        //             where m.MaSv == id
-        //             select new
-        //             {
-        //                 GiaoDich = "Mượn",
-        //                 q.MaQtt,
-        //                 q.TenQtt,
-        //                 k.MaKc,
-        //                 k.TenKc,
-        //                 NgayGiaoDich = m.NgayMuon
-        //             };
-        //    var _hd = from d in db.HoaDonDoi
-        //              join q in db.QuanTuTrang on d.MaQtt equals q.MaQtt
-        //              join k in db.KichCo on d.MaKc equals k.MaKc
-        //              where d.MaSv == id
-        //              select new
-        //              {
-        //                  GiaoDich = "Đổi",
-        //                  q.MaQtt,
-        //                  q.TenQtt,
-        //                  k.MaKc,
-        //                  k.TenKc,
-        //                  NgayGiaoDich = d.NgayDoi
-        //              };
-        //    var list = hd.ToList();
-        //    foreach (var i in _hd)
-        //    {
-        //        list.Add(i);
-        //    }
-        //    dtgHD.ItemsSource = list;
-        //}
-
         private void btnLogOut_Click(object sender, RoutedEventArgs e)
         {
             var logIn = new LogIn();
@@ -110,21 +51,25 @@ namespace QLQTT
                        join q in db.QuanTuTrang on d.MaQtt equals q.MaQtt
                        join k in db.KichCo on d.MaKc equals k.MaKc
                        where d.MaSv == sv.MaSv
-                       let ttm = (d.TrangThaiMat) ? "Đang mất" : "Đang mượn"
+                       let ttm = d.TrangThai
                        select new
                        {
-                           q.MaQtt,
-                           q.TenQtt,
-                           k.MaKc,
-                           k.TenKc,
+                           q,
+                           k,
                            ttm
                        };
-            dtgDS.ItemsSource = list.ToList();
+            List<SelectedBorrowedQTT> listqtt = new List<SelectedBorrowedQTT>();
+            foreach (var i in list)
+            {
+                SelectedBorrowedQTT q = new SelectedBorrowedQTT(i.q, false, i.ttm, i.k);
+                listqtt.Add(q);
+            }
+            dtgDS.ItemsSource = listqtt;
         }
 
         private void dtgHD_Loaded(object sender, RoutedEventArgs e)
         {
-            var hd = from m in db.HoaDonMuon
+            var hdm = from m in db.HoaDonMuon
                      join q in db.QuanTuTrang on m.MaQtt equals q.MaQtt
                      join k in db.KichCo on m.MaKc equals k.MaKc
                      where m.MaSv == sv.MaSv
@@ -137,7 +82,7 @@ namespace QLQTT
                          k.TenKc,
                          NgayGiaoDich = m.NgayMuon
                      };
-            var _hd = from d in db.HoaDonDoi
+            var hdd = from d in db.HoaDonDoi
                       join q in db.QuanTuTrang on d.MaQtt equals q.MaQtt
                       join k in db.KichCo on d.MaKc equals k.MaKc
                       where d.MaSv == sv.MaSv
@@ -150,12 +95,12 @@ namespace QLQTT
                           k.TenKc,
                           NgayGiaoDich = d.NgayDoi
                       };
-            var list = hd.ToList();
-            foreach (var i in _hd)
+            var listHD = hdm.ToList();
+            foreach (var i in hdd)
             {
-                list.Add(i);
+                listHD.Add(i);
             }
-            dtgHD.ItemsSource = list;
+            dtgHD.ItemsSource = listHD;
         }
 
         private void MainStudent_Loaded(object sender, RoutedEventArgs e)
@@ -164,7 +109,7 @@ namespace QLQTT
             lblName.Content = sv.TenSv;
             byte[] byteArray = sv.Anh.ToArray();
             img.Source = convert(byteArray);
-            IEnumerable<KhoanNo> m = db.KhoanNo.Where(ele => ele.MaSv.Equals(sv.MaSv));
+            IEnumerable<CongNo> m = db.CongNo.Where(ele => ele.MaSv.Equals(sv.MaSv));
             if (m.Count() == 0)
             {
                 lblMoney.Content = "Nợ: 0 đồng";
@@ -205,17 +150,167 @@ namespace QLQTT
             cbbKC.SelectedValuePath = "MaKc";
         }
 
-        //private void dtgDK_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    var kc = from k in db.KichCo
-        //             select k;
-        //    List<KichCo> listKc = new List<KichCo>();
-        //    foreach (KichCo i in kc)
-        //    {
-        //        if (!i.MoTa.Equals("all"))
-        //            listKc.Add(i);
-        //    }
-        //    dtgDK.ItemsSource = listKc;
-        //}
+        private void btnBM_Click(object sender, RoutedEventArgs e)
+        {
+            List<SelectedBorrowedQTT> listCheck = new List<SelectedBorrowedQTT>();
+            foreach (SelectedBorrowedQTT i in dtgDS.ItemsSource)
+            {
+                if (i.isChecked)
+                {
+                    listCheck.Add(i);
+                }
+            }
+            if (listCheck.Count() == 0)
+            {
+                MessageBox.Show("Bạn chưa chọn quân tư trang nào");
+            }
+            else
+            {
+                bool checkLost = true;
+                foreach (SelectedBorrowedQTT i in listCheck)
+                {
+                    if (i.tt.Equals("Đang mất"))
+                    {
+                        MessageBox.Show(i.qtt.TenQtt+ " đã được báo mất!");
+                        checkLost = false;
+                        break;
+                    }
+                }
+                if (checkLost)
+                {
+                    foreach (SelectedBorrowedQTT i in listCheck)
+                    {
+                        MessageBoxResult messageBoxResult = MessageBox.Show("Bạn có chắc chắn muốn báo mất " +
+                                                i.qtt.TenQtt + "?", "Confirmation Box", MessageBoxButton.YesNo);
+                        if (messageBoxResult == MessageBoxResult.Yes)
+                        {
+                            var q = db.DangMuon.SingleOrDefault(t => t.MaSv.Equals(sv.MaSv)
+                                && t.MaQtt.Equals(i.qtt.MaQtt));
+                            q.TrangThai = "Đang mất";
+                            var hdm = db.HoaDonMuon.SingleOrDefault(t => t.MaSv.Equals(sv.MaSv)
+                                                        && t.MaQtt.Equals(i.qtt.MaQtt) && !(t.TrangThai.Equals("Đã mất")
+                                                    || t.TrangThai.Equals("Đã đổi")));
+                            if (hdm != null)
+                            {
+                                hdm.TrangThai = "Đã mất";
+                            }
+                            else
+                            {
+                                var hdd = db.HoaDonDoi.SingleOrDefault(t => t.MaSv.Equals(sv.MaSv)
+                                                        && t.MaQtt.Equals(i.qtt.MaQtt) && !(t.TrangThai.Equals("Đã mất")
+                                    || t.TrangThai.Equals("Đã đổi")));
+                                hdd.TrangThai = "Đã mất";
+                            }
+                            var kn = db.CongNo.SingleOrDefault(t => t.MaSv.Equals(sv.MaSv));
+                            if (kn == null)
+                            {
+                                // Tạo khoản nợ mới
+                                CongNo cn = new CongNo();
+                                // cn.MaCn = newKN(); (Tạo mã mới)
+                                cn.MaSv = sv.MaSv;
+                                cn.TienNo = i.qtt.GiaTien;
+                                // kn.HanTra = ; (Dựa vào thời gian kết thúc khóa học)
+                                db.CongNo.Add(cn);
+                            }
+                            else
+                            {
+                                kn.TienNo += i.qtt.GiaTien;
+                            }
+                            db.SaveChanges();
+                        }
+                    }
+                    dtgDS_Loaded(sender, e);
+                }
+
+            }
+        }
+
+        private void btnDoi_Click(object sender, RoutedEventArgs e)
+        {
+            List<SelectedBorrowedQTT> listCheck = new List<SelectedBorrowedQTT>();
+            foreach (SelectedBorrowedQTT i in dtgDS.ItemsSource)
+            {
+                if (i.isChecked)
+                {
+                    listCheck.Add(i);
+                }
+            }
+            if (listCheck.Count() == 0)
+            {
+                MessageBox.Show("Bạn chưa chọn quân tư trang nào");
+            }
+            else
+            {
+                bool checkLost = true;
+                foreach (SelectedBorrowedQTT i in listCheck)
+                {
+                    if (i.tt.Equals("Đang mất"))
+                    {
+                        MessageBox.Show(i.qtt.TenQtt + " đã được báo mất!");
+                        checkLost = false;
+                        break;
+                    }
+                    if (i.tt.Equals("Chờ đổi"))
+                    {
+                        MessageBox.Show(i.qtt.TenQtt + " đang được chờ đổi!");
+                        checkLost = false;
+                        break;
+                    }
+                }
+                if (checkLost)
+                {
+                    foreach (SelectedBorrowedQTT i in listCheck)
+                    {
+                        string id = i.kc.MaKc;
+                        if (!i.kc.TenKc.Equals("none"))
+                        {
+                            bool check = false;
+                            do
+                            {
+                                MessageBoxResult messageBoxResult1 = MessageBox.Show("Bạn có muốn chọn kích cỡ khác cho " +
+                                            i.qtt.TenQtt + "?", "Confirmation Box", MessageBoxButton.YesNo);
+                                if (messageBoxResult1 == MessageBoxResult.Yes)
+                                {
+                                    // Cửa sổ chọn kích cỡ
+                                    // Nếu hủy việc chọn kích cỡ thì check = true
+                                    // Nếu chọn được kích cỡ thì truyền MaKc vào id
+                                }
+                            } while (check);
+                        }
+                        MessageBoxResult messageBoxResult2 = MessageBox.Show("Bạn có chắc chắn muốn đổi " +
+                            i.qtt.TenQtt + "?", "Confirmation Box", MessageBoxButton.YesNo);
+                        if (messageBoxResult2 == MessageBoxResult.Yes)
+                        {
+                            var q = db.DangMuon.SingleOrDefault(t => t.MaSv.Equals(sv.MaSv)
+                                    && t.MaQtt.Equals(i.qtt.MaQtt));
+                            q.TrangThai = "Chờ đổi";
+                            var hdm = db.HoaDonMuon.SingleOrDefault(t => t.MaSv.Equals(sv.MaSv)
+                                && t.MaQtt.Equals(i.qtt.MaQtt) && !(t.TrangThai.Equals("Đã mất")
+                                || t.TrangThai.Equals("Đã đổi")));
+                            if (hdm != null)
+                            {
+                                hdm.TrangThai = "Đã đổi";
+                            }
+                            else
+                            {
+                                var hdd = db.HoaDonDoi.SingleOrDefault(t => t.MaSv.Equals(sv.MaSv)
+                                    && t.MaQtt.Equals(i.qtt.MaQtt) && !(t.TrangThai.Equals("Đã mất")
+                                    || t.TrangThai.Equals("Đã đổi")));
+                                hdd.TrangThai = "Đã đổi";
+                            }
+                            HoaDonDoi hd = new HoaDonDoi();
+                            // hd.MaHdd = newHDD(); (Tạo mã mới)
+                            hd.MaSv = sv.MaSv;
+                            hd.MaQtt = i.qtt.MaQtt;
+                            hd.MaKc = id;
+                            // Truyền vào các thuộc tính khác
+                            db.HoaDonDoi.Add(hd);
+                            db.SaveChanges();
+                        }
+                    }
+                    dtgDS_Loaded(sender, e);
+                }
+            }
+        }
     }
 }
