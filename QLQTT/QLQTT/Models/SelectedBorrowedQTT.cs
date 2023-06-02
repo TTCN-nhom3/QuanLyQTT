@@ -9,11 +9,11 @@ namespace QLQTT.Models
     class SelectedBorrowedQTT : SelectedQTT
     {
         public KichCo kc { get; set; }
-        public string tt { get; set; }
-        public SelectedBorrowedQTT(QuanTuTrang qtt, bool isChecked, string tt, KichCo kc) : base(qtt, isChecked)
+        public bool changing { get; set; }
+        public SelectedBorrowedQTT(QuanTuTrang qtt, bool isChecked, KichCo kc, bool changing) : base(qtt, isChecked)
         {
-            this.tt = tt;
             this.kc = kc;
+            this.changing = changing;
         }
     }
 }

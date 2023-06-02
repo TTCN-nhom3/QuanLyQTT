@@ -9,8 +9,9 @@ namespace QLQTT.Models
         {
             ChiTietQtt = new HashSet<ChiTietQtt>();
             DangMuon = new HashSet<DangMuon>();
-            HoaDonDoi = new HashSet<HoaDonDoi>();
-            HoaDonMuon = new HashSet<HoaDonMuon>();
+            Doi = new HashSet<Doi>();
+            Mat = new HashSet<Mat>();
+            Muon = new HashSet<Muon>();
         }
 
         public string MaQtt { get; set; }
@@ -21,7 +22,8 @@ namespace QLQTT.Models
 
         public virtual ICollection<ChiTietQtt> ChiTietQtt { get; set; }
         public virtual ICollection<DangMuon> DangMuon { get; set; }
-        public virtual ICollection<HoaDonDoi> HoaDonDoi { get; set; }
-        public virtual ICollection<HoaDonMuon> HoaDonMuon { get; set; }
+        public virtual ICollection<Doi> Doi { get; set; }
+        public virtual ICollection<Mat> Mat { get; set; }
+        public virtual ICollection<Muon> Muon { get; set; }
     }
 }

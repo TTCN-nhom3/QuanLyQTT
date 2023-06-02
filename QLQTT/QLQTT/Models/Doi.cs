@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace QLQTT.Models
 {
-    public partial class HoaDonMuon
+    public partial class Doi
     {
-        public string MaHdm { get; set; }
+        public string MaDoi { get; set; }
         public string MaSv { get; set; }
         public string MaQtt { get; set; }
         public string MaKc { get; set; }
-        public DateTime NgayTaoHd { get; set; }
-        public DateTime? NgayMuon { get; set; }
+        public DateTime NgayDk { get; set; }
+        public DateTime? NgayDoi { get; set; }
         public string TrangThai { get; set; }
         public string MoTa { get; set; }
 

@@ -1,0 +1,109 @@
+﻿<Window x:Class="QLQTT.ActionDetail"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QLQTT"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="ActionDetail" Height="500" Width="600">
+    <Grid Loaded="start_Loaded">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.8*"/>
+        </Grid.RowDefinitions>
+        <Label x:Name="lblType" HorizontalAlignment="Center"
+               VerticalAlignment="Center" FontSize="24"
+               FontWeight="Bold" Grid.Row="0" Content="Phiếu mượn"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*"/>
+            </Grid.ColumnDefinitions>
+            <Label HorizontalAlignment="Left" x:Name="lblIdTitle"
+                   VerticalAlignment="Top" Margin="10, 20, 0, 0"
+                   Content="Mã mượn:" FontSize="14" Grid.Column="0"
+                   FontWeight="Bold"/>
+            <Label HorizontalAlignment="Left" x:Name="lblId"
+                   VerticalAlignment="Top" Margin="140, 20, 0, 0"
+                   Content="0000000000" FontSize="14" Grid.Column="0"/>
+            <Label HorizontalAlignment="Left" x:Name="lblSNameTitle"
+                   VerticalAlignment="Top" Margin="10, 60, 0, 0"
+                   Content="Họ tên:" FontSize="14" Grid.Column="0"
+                   FontWeight="Bold"/>
+            <Label HorizontalAlignment="Left" x:Name="lblSName"
+                   VerticalAlignment="Top" Margin="140, 60, 0, 0"
+                   Content="Nguyễn Linh Trường" FontSize="14" Grid.Column="0"/>
+            <Label HorizontalAlignment="Left" x:Name="lblSIdTitle"
+                   VerticalAlignment="Top" Margin="10, 60, 0, 0"
+                   Content="Mã sinh viên:" FontSize="14" Grid.Column="1"
+                   FontWeight="Bold"/>
+            <Label HorizontalAlignment="Left" x:Name="lblSId"
+                   VerticalAlignment="Top" Margin="140, 60, 0, 0"
+                   Content="0000000000" FontSize="14" Grid.Column="1"/>
+            <Label HorizontalAlignment="Left" x:Name="lblCStartTitle"
+                   VerticalAlignment="Top" Margin="10, 100, 0, 0"
+                   Content="Học từ:" FontSize="14" Grid.Column="0"
+                   FontWeight="Bold"/>
+            <Label HorizontalAlignment="Left" x:Name="lblCStart"
+                   VerticalAlignment="Top" Margin="140, 100, 0, 0"
+                   Content="dd/mm/yyyy" FontSize="14" Grid.Column="0"/>
+            <Label HorizontalAlignment="Left" x:Name="lblCFinishTitle"
+                   VerticalAlignment="Top" Margin="10, 100, 0, 0"
+                   Content="Đến:" FontSize="14" Grid.Column="1"
+                   FontWeight="Bold"/>
+            <Label HorizontalAlignment="Left" x:Name="lblCFinish"
+                   VerticalAlignment="Top" Margin="140, 100, 0, 0"
+                   Content="dd/mm/yyyy" FontSize="14" Grid.Column="1"/>
+            <Label HorizontalAlignment="Left" x:Name="lblQttNameTitle"
+                   VerticalAlignment="Top" Margin="10, 140, 0, 0"
+                   Content="Quân tư trang:" FontSize="14" Grid.Column="0"
+                   FontWeight="Bold"/>
+            <Label HorizontalAlignment="Left" x:Name="lblQttName"
+                   VerticalAlignment="Top" Margin="140, 140, 0, 0"
+                   Content="Áo" FontSize="14" Grid.Column="0"/>
+            <Label HorizontalAlignment="Left" x:Name="lblQttIdTitle"
+                   VerticalAlignment="Top" Margin="10, 140, 0, 0"
+                   Content="Mã quân tư trang:" FontSize="14" Grid.Column="1"
+                   FontWeight="Bold"/>
+            <Label HorizontalAlignment="Left" x:Name="lblQttId"
+                   VerticalAlignment="Top" Margin="140, 140, 0, 0"
+                   Content="0000000000" FontSize="14" Grid.Column="1"/>
+            <Label HorizontalAlignment="Left" x:Name="lblkNameTitle"
+                   VerticalAlignment="Top" Margin="10, 180, 0, 0"
+                   Content="Kích cỡ:" FontSize="14" Grid.Column="0"
+                   FontWeight="Bold"/>
+            <Label HorizontalAlignment="Left" x:Name="lblkName"
+                   VerticalAlignment="Top" Margin="140, 180, 0, 0"
+                   Content="Size " FontSize="14" Grid.Column="0"/>
+            <Label HorizontalAlignment="Left" x:Name="lblkIdTitle"
+                   VerticalAlignment="Top" Margin="10, 180, 0, 0"
+                   Content="Mã kích cỡ:" FontSize="14" Grid.Column="1"
+                   FontWeight="Bold"/>
+            <Label HorizontalAlignment="Left" x:Name="lblkId"
+                   VerticalAlignment="Top" Margin="140, 180, 0, 0"
+                   Content="0000000000" FontSize="14" Grid.Column="1"/>
+            <Label HorizontalAlignment="Left" x:Name="lblcreateDateTitle"
+                   VerticalAlignment="Top" Margin="10, 220, 0, 0"
+                   Content="Ngày đăng ký:" FontSize="14" Grid.Column="0"
+                   FontWeight="Bold"/>
+            <Label HorizontalAlignment="Left" x:Name="lblcreateDate"
+                   VerticalAlignment="Top" Margin="140, 220, 0, 0"
+                   Content="dd/mm/yyyy" FontSize="14" Grid.Column="0"/>
+            <Label HorizontalAlignment="Left" x:Name="lblactionDateTitle"
+                   VerticalAlignment="Top" Margin="10, 220, 0, 0"
+                   Content="Ngày mượn:" FontSize="14" Grid.Column="1"
+                   FontWeight="Bold"/>
+            <Label HorizontalAlignment="Left" x:Name="lblactionDate"
+                   VerticalAlignment="Top" Margin="140, 220, 0, 0"
+                   Content="dd/mm/yyyy" FontSize="14" Grid.Column="1"/>
+            <Label HorizontalAlignment="Left" x:Name="lblStatusTitle"
+                   VerticalAlignment="Top" Margin="10, 260, 0, 0"
+                   Content="Trạng thái:" FontSize="14" Grid.Column="0"
+                   FontWeight="Bold"/>
+            <Label HorizontalAlignment="Left" x:Name="lblStatus"
+                   VerticalAlignment="Top" Margin="140, 260, 0, 0"
+                   Content="Hoàn thành" FontSize="14" Grid.Column="0"/>
+        </Grid>
+
+    </Grid>
+</Window>

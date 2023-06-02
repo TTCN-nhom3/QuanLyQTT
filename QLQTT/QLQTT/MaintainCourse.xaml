@@ -1,0 +1,59 @@
+﻿<Window x:Class="QLQTT.MaintainCourse"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QLQTT"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen"
+        Title="MaintainCourse" MinHeight="500" MinWidth="600"
+        Height="500" Width="600">
+    <Grid Height="450" Width="500">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.6*"/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Bảo trì Khóa học" Grid.Row="0"
+               FontSize="24" HorizontalAlignment="Center"
+               FontWeight="Bold" VerticalAlignment="Center"/>
+        <DataGrid AutoGenerateColumns="False"
+                  VerticalAlignment="Stretch" x:Name="dtgKH"
+                  CanUserAddRows="False" Loaded="dtgKH_Load"
+                  Grid.Row="1" HorizontalAlignment="Stretch">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Mã Khóa học"
+                                    Binding="{Binding MaKh}"/>
+                <DataGridTextColumn Header="Ngày bắt đầu"
+                                    Binding="{Binding NgayBD}"/>
+                <DataGridTextColumn Header="Ngày kết thúc"
+                                    Binding="{Binding NgayKT}"/>
+                <DataGridTemplateColumn Header="Cập nhật">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Cập nhật" x:Name="btnUpdateKH"
+                                    Click="btnUpdateKH_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Xóa">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Xóa" x:Name="btnDeleteKH"
+                                    Click="btnDeleteKH_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Thêm mới" HorizontalAlignment="Center"
+                Margin="0,0,250,0" VerticalAlignment="Center"
+                FontSize="14" Width="100" x:Name="btnAddKH"
+                Height="40"  Click="btnAddKH_Click"
+                Grid.Row="2"/>
+        <Button Content="Thoát" HorizontalAlignment="Center"
+                Margin="250,0,0,0" VerticalAlignment="Center"
+                FontSize="14" Width="100" x:Name="btnCancel"
+                Height="40" Click="btnCancel_Click"
+                Grid.Row="2"/>
+    </Grid>
+</Window>

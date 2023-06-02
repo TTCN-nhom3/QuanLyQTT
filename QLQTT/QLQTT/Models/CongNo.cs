@@ -7,7 +7,7 @@ namespace QLQTT.Models
     {
         public string MaCn { get; set; }
         public string MaSv { get; set; }
-        public decimal? TienNo { get; set; }
+        public decimal SoTien { get; set; }
         public DateTime HanTra { get; set; }
         public string MoTa { get; set; }
 

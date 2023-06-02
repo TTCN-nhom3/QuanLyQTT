@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D9F15FD9-4295-44EB-A864-BD19A4AC8F4A}</ProjectGuid>
+    <ProjectGuid>{3E016568-0E82-4F99-89AE-2DCE8254E46A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>QLQTT</RootNamespace>
     <AssemblyName>QLQTT</AssemblyName>
@@ -152,9 +152,39 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ActionDetail.xaml.cs">
+      <DependentUpon>ActionDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddAndUpdateCourse.xaml.cs">
+      <DependentUpon>AddAndUpdateCourse.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddAndUpdateQTT.xaml.cs">
+      <DependentUpon>AddAndUpdateQTT.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddAndUpdateQTTDetail.xaml.cs">
+      <DependentUpon>AddAndUpdateQTTDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddAndUpdateSize.xaml.cs">
+      <DependentUpon>AddAndUpdateSize.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MaintainCourse.xaml.cs">
+      <DependentUpon>MaintainCourse.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MaintainQTT.xaml.cs">
+      <DependentUpon>MaintainQTT.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MaintainQTTDetail.xaml.cs">
+      <DependentUpon>MaintainQTTDetail.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MaintainSize.xaml.cs">
+      <DependentUpon>MaintainSize.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SelectSizeForChangeAction.xaml.cs">
+      <DependentUpon>SelectSizeForChangeAction.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -170,11 +200,12 @@
     <Compile Include="Models\ChiTietQtt.cs" />
     <Compile Include="Models\CongNo.cs" />
     <Compile Include="Models\DangMuon.cs" />
-    <Compile Include="Models\HoaDonDoi.cs" />
-    <Compile Include="Models\HoaDonMuon.cs" />
+    <Compile Include="Models\Doi.cs" />
     <Compile Include="Models\HoaDonThanhToan.cs" />
     <Compile Include="Models\KhoaHoc.cs" />
     <Compile Include="Models\KichCo.cs" />
+    <Compile Include="Models\Mat.cs" />
+    <Compile Include="Models\Muon.cs" />
     <Compile Include="Models\QLQTTContext.cs" />
     <Compile Include="Models\QuanTuTrang.cs" />
     <Compile Include="Models\SelectedBorrowedQTT.cs" />
@@ -207,6 +238,26 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="ActionDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddAndUpdateCourse.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddAndUpdateQTT.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddAndUpdateQTTDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddAndUpdateSize.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LogIn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -216,6 +267,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MainStudent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MaintainCourse.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MaintainQTT.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MaintainQTTDetail.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MaintainSize.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SelectSizeForChangeAction.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

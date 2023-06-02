@@ -5,10 +5,150 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QLQTT"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="MainAdmin" Height="450" Width="800">
-    <Grid>
-        <Label Content="Admin" FontSize="30"/>
-        <Button x:Name="btnLogOut" HorizontalAlignment="Center" Content="Đăng xuất"
-            Height="30" FontSize="20" VerticalAlignment="Bottom" Margin="0, 0, 0, 50" Click="btnLogOut_Click"/>
+        Title="MainAdmin" Height="625" Width="825"
+        MinHeight="625" MinWidth="825">
+    <Grid Height="600" Width="800">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*"/>
+            <RowDefinition Height="0.85*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Label x:Name="lblNeededSubmit"
+                   Foreground="Red" FontSize="16"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Left"
+                   Margin="20, 10, 0 , 0" Height="30"
+                   Content="abc"
+                   VerticalContentAlignment="Center"/>
+            <Label x:Name="lblIsEnough"
+                   Foreground="Red" FontSize="16"
+                   VerticalAlignment="Top"
+                   HorizontalAlignment="Left"
+                   Margin="20, 40, 0 , 0" Height="30"
+                   Content="abc"
+                   VerticalContentAlignment="Center"/>
+        </Grid>
+        <TabControl Grid.Row="1">
+            <TabItem x:Name="tabMaintain" Header="Bảo trì">
+                <Grid>
+
+                    <Button Content="Bảo trì Quân tư trang"
+                            x:Name="btnQTTMaintain"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Height="100" Width="200"
+                            Margin="80, 40" FontSize="20"
+                            Click="btnQTTMaintain_Click"/>
+                    <Button Content="Bảo trì Kich cỡ"
+                            x:Name="btnKCMaintain"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Height="100" Width="200"
+                            Margin="80, 40" FontSize="20"
+                            Click="btnKCMaintain_Click"/>
+                    <Button x:Name="btnCTQTTMaintain"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"
+                            Height="100" Width="200"
+                            Margin="80, 40" FontSize="20"
+                            Click="btnCTQTTMaintain_Click">
+                        <TextBlock Text="Bảo trì Chi tiết quân tư trang"
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Center"/>
+                    </Button>
+                    <Button Content="Bảo trì Khóa học"
+                            x:Name="btnKHMaintain"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Bottom"
+                            Height="100" Width="200"
+                            Margin="80, 40" FontSize="20"
+                            Click="btnKHMaintain_Click"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Quản lý mượn">
+                <Grid Background="#FFE5E5E5">
+                    <TextBox HorizontalAlignment="Left" Margin="198,51,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <Button Content="Tìm kiếm" HorizontalAlignment="Left" Margin="445,50,0,0" VerticalAlignment="Top"/>
+                    <DataGrid Margin="50,97,50,140"/>
+                    <Button Content="Xác nhận" HorizontalAlignment="Center" Margin="0,301,0,0" VerticalAlignment="Top" Height="31" Width="86"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Quản lý đổi">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition Width="0.5*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Đăng ký đổi đang chờ xác nhận"
+                           Grid.Column="0" HorizontalAlignment="Center"
+                           FontSize="20" FontWeight="Bold"
+                           VerticalAlignment="Top" Margin="10"/>
+                    <DataGrid VerticalAlignment="Top" Grid.Column="0"
+                              HorizontalAlignment="Stretch"
+                              Margin="15, 60, 15, 0" Height="300"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mã sinh viên"/>
+                            <DataGridTextColumn Header="Quân tư trang"/>
+                            <DataGridTextColumn Header="Kích cỡ"/>
+                            <DataGridTextColumn Header="Ngày đăng ký"/>
+                            <DataGridTextColumn Header="Xác nhận"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Quản lý trả">
+                <Grid Background="#FFE5E5E5">
+                    <Grid Background="#FFE5E5E5">
+                        <TextBox HorizontalAlignment="Left" Margin="198,51,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                        <Button Content="Tìm kiếm" HorizontalAlignment="Left" Margin="445,50,0,0" 
+                                VerticalAlignment="Top"/>
+                        <DataGrid Margin="50,97,50,140"/>
+                        <Button Content="Xác nhận" HorizontalAlignment="Center" Margin="0,301,0,0" VerticalAlignment="Top" Height="31" Width="86"/>
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Thanh toán">
+                <Grid Background="#FFE5E5E5">
+                    <TextBox HorizontalAlignment="Left" Margin="198,51,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <Button Content="Tìm kiếm" HorizontalAlignment="Left" Margin="445,50,0,0" 
+                                VerticalAlignment="Top"/>
+                    <Label Content="Mã sinh viên:" HorizontalAlignment="Left" 
+                           Margin="207,100,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Tên sinh viên:" HorizontalAlignment="Left" 
+                           Margin="207,150,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Nợ:" HorizontalAlignment="Left" 
+                           Margin="207,200,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Thanh toán:" HorizontalAlignment="Left" 
+                           Margin="207,250,0,0" VerticalAlignment="Top"/>
+                    <TextBox HorizontalAlignment="Left" Margin="324,254,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <Button Content="Thanh toán" HorizontalAlignment="Left" Margin="217,313,0,0" 
+                        VerticalAlignment="Top" />
+                    <Button Content="Hủy bỏ" HorizontalAlignment="Left" Margin="471,313,0,0" 
+                        VerticalAlignment="Top" Width="54"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Thống kê">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Danh sách hóa đơn">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="185*"/>
+                        <ColumnDefinition Width="212*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Mã sinh viên:" HorizontalAlignment="Left" Margin="78,29,0,0" VerticalAlignment="Top"/>
+                    <TextBox HorizontalAlignment="Left" Margin="209,33,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="Quân tư trang:" HorizontalAlignment="Left" Margin="134,29,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    <ComboBox HorizontalAlignment="Left" Margin="258,29,0,0" VerticalAlignment="Top" Width="120" Grid.Column="1"/>
+                    <Label Content="Ngày tạo:" HorizontalAlignment="Left" Margin="90,81,0,0" VerticalAlignment="Top"/>
+                    <DatePicker HorizontalAlignment="Left" Margin="209,81,0,0" VerticalAlignment="Top"/>
+                    <Label Content="Ngày mượn/ đổi:" HorizontalAlignment="Center" Margin="0,81,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    <DatePicker HorizontalAlignment="Left" Margin="261,81,0,0" VerticalAlignment="Top" Grid.Column="1"/>
+                    <DataGrid Margin="78,156,46,91" Grid.ColumnSpan="2"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>

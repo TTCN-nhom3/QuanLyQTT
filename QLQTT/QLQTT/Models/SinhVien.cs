@@ -9,9 +9,10 @@ namespace QLQTT.Models
         {
             CongNo = new HashSet<CongNo>();
             DangMuon = new HashSet<DangMuon>();
-            HoaDonDoi = new HashSet<HoaDonDoi>();
-            HoaDonMuon = new HashSet<HoaDonMuon>();
+            Doi = new HashSet<Doi>();
             HoaDonThanhToan = new HashSet<HoaDonThanhToan>();
+            Mat = new HashSet<Mat>();
+            Muon = new HashSet<Muon>();
         }
 
         public string MaSv { get; set; }
@@ -24,8 +25,9 @@ namespace QLQTT.Models
         public virtual KhoaHoc MaKhNavigation { get; set; }
         public virtual ICollection<CongNo> CongNo { get; set; }
         public virtual ICollection<DangMuon> DangMuon { get; set; }
-        public virtual ICollection<HoaDonDoi> HoaDonDoi { get; set; }
-        public virtual ICollection<HoaDonMuon> HoaDonMuon { get; set; }
+        public virtual ICollection<Doi> Doi { get; set; }
         public virtual ICollection<HoaDonThanhToan> HoaDonThanhToan { get; set; }
+        public virtual ICollection<Mat> Mat { get; set; }
+        public virtual ICollection<Muon> Muon { get; set; }
     }
 }

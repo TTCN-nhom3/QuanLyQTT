@@ -29,13 +29,13 @@ namespace QLQTT
         private void btnLogIn_Click(object sender, RoutedEventArgs e)
         {
             var query = db.SinhVien.SingleOrDefault(t => t.MaSv.Equals(txtName.Text));
-            if (query == null && txtName.Text != "admin")
+            if (query == null && txtName.Text != "ad")
             {
                 MessageBox.Show("Username không tồn tại!");
             }
-            else if (txtName.Text == "admin")
+            else if (txtName.Text == "ad")
             {
-                if (txtPW.Text != "abc123")
+                if (txtPW.Text != "123")
                 {
                     MessageBox.Show("Sai mật khẩu!");
                 }
@@ -62,6 +62,23 @@ namespace QLQTT
                 {
                     MessageBox.Show("Sai mật khẩu!");
                 }
+            }
+        }
+
+        private void btnTest_Click(object sender, RoutedEventArgs e)
+        {
+            string id = "QTT0000007";
+            var muon = db.Muon.SingleOrDefault(m => m.MaQtt.Equals(id));
+            var doi = db.Doi.SingleOrDefault(d => d.MaQtt.Equals(id));
+            var mat = db.Mat.SingleOrDefault(m => m.MaQtt.Equals(id));
+            var dangmuon = db.DangMuon.SingleOrDefault(d => d.MaQtt.Equals(id));
+            if (muon != null || doi != null || mat != null || dangmuon != null)
+            {
+                txtTest.Text = "yes";
+            }
+            else
+            {
+                txtTest.Text = "no";
             }
         }
     }

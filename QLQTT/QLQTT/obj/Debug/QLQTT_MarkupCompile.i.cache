@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\Study\Haui\3rd year 2nd main semester\Major Internship\Projects\QuanLyQTT\QLQTT\QLQTT\App.xaml
-390881583
+13-1913552295
 
-211310463292
+32843415559
 149-606783691
-LogIn.xaml;MainAdmin.xaml;MainStudent.xaml;
+ActionDetail.xaml;AddAndUpdateCourse.xaml;AddAndUpdateQTT.xaml;AddAndUpdateQTTDetail.xaml;AddAndUpdateSize.xaml;LogIn.xaml;MainAdmin.xaml;MainStudent.xaml;MaintainCourse.xaml;MaintainQTT.xaml;MaintainQTTDetail.xaml;MaintainSize.xaml;SelectSizeForChangeAction.xaml;
 
-False
+True
 

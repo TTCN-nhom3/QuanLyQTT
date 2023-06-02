@@ -6,19 +6,33 @@
         xmlns:local="clr-namespace:QLQTT"
         mc:Ignorable="d"  WindowStartupLocation="CenterScreen"
         Title="LogIn" Height="400" Width="500">
-    <Grid HorizontalAlignment="Center" VerticalAlignment="Center"
+    <Grid HorizontalAlignment="Center"
+          VerticalAlignment="Center"
           MinHeight="300" MinWidth="400">
         <Label Content="Đăng nhập" HorizontalAlignment="Center"
-               VerticalAlignment="Top" FontSize="26" FontWeight="Bold"/>
+               VerticalAlignment="Top" FontSize="26"
+               FontWeight="Bold"/>
         <Label Content="Usename:" HorizontalAlignment="Left"
-               VerticalAlignment="Top" FontSize="20" Margin="20, 80, 0, 0"/>
-        <TextBox x:Name="txtName"  HorizontalAlignment="Right" Width="220"
-               VerticalAlignment="Top" FontSize="20" Margin="0, 80, 20, 0"/>
+               VerticalAlignment="Top" FontSize="20"
+               Margin="20, 80, 0, 0"/>
+        <TextBox x:Name="txtName"  HorizontalAlignment="Right"
+                 Width="220" VerticalAlignment="Top"
+                 FontSize="20" Margin="0, 80, 20, 0"/>
         <Label Content="Password:" HorizontalAlignment="Left"
-               VerticalAlignment="Top" FontSize="20" Margin="20, 140, 0, 0"/>
-        <TextBox x:Name="txtPW"  HorizontalAlignment="Right" Width="220"
-               VerticalAlignment="Top" FontSize="20" Margin="0, 140, 20, 0"/>
-        <Button x:Name="btnLogIn" HorizontalAlignment="Center" Content="Đăng nhập" Padding="5 5 5 5" 
-                FontSize="20" VerticalAlignment="Bottom" Margin="0, 0, 0, 50" Click="btnLogIn_Click"/>
+               VerticalAlignment="Top" FontSize="20"
+               Margin="20, 140, 0, 0"/>
+        <TextBox x:Name="txtPW"  HorizontalAlignment="Right"
+                 Width="220" VerticalAlignment="Top"
+                 FontSize="20" Margin="0, 140, 20, 0"/>
+        <Button x:Name="btnLogIn" HorizontalAlignment="Center"
+                Content="Đăng nhập" Padding="5 5 5 5" 
+                FontSize="20" VerticalAlignment="Bottom"
+                Margin="0, 0, 0, 50" Click="btnLogIn_Click"/>
+        <Button x:Name="btnTest" HorizontalAlignment="Left"
+                Content="Test" Padding="5 5 5 5" 
+                FontSize="20" VerticalAlignment="Bottom"
+                Margin="10, 50" Click="btnTest_Click"/>
+        <TextBlock x:Name="txtTest" VerticalAlignment="Bottom"
+                   HorizontalAlignment="Center" Margin="10"/>
     </Grid>
 </Window>
