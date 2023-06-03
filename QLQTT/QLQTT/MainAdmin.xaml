@@ -6,51 +6,56 @@
         xmlns:local="clr-namespace:QLQTT"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Title="MainAdmin" Height="625" Width="825"
-        MinHeight="625" MinWidth="825">
+        MinHeight="625" MinWidth="825" Loaded="Window_Loaded">
     <Grid Height="600" Width="800">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.15*"/>
             <RowDefinition Height="0.85*"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <Label x:Name="lblNeededSubmit"
+            <Label x:Name="tenSv"
                    Foreground="Red" FontSize="16"
                    VerticalAlignment="Top"
                    HorizontalAlignment="Left"
                    Margin="20, 10, 0 , 0" Height="30"
                    Content="abc"
-                   VerticalContentAlignment="Center"/>
-            <Label x:Name="lblIsEnough"
+                   VerticalContentAlignment="Center" FontWeight="Bold"/>
+            <Label x:Name="maSv"
                    Foreground="Red" FontSize="16"
                    VerticalAlignment="Top"
                    HorizontalAlignment="Left"
                    Margin="20, 40, 0 , 0" Height="30"
                    Content="abc"
-                   VerticalContentAlignment="Center"/>
+                   VerticalContentAlignment="Center" FontWeight="Bold"/>
         </Grid>
         <TabControl Grid.Row="1">
             <TabItem x:Name="tabMaintain" Header="Bảo trì">
                 <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="379*"/>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="408*"/>
+                    </Grid.ColumnDefinitions>
 
                     <Button Content="Bảo trì Quân tư trang"
                             x:Name="btnQTTMaintain"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             Height="100" Width="200"
-                            Margin="80, 40" FontSize="20"
+                            Margin="80,40,0,0" FontSize="20"
                             Click="btnQTTMaintain_Click"/>
                     <Button Content="Bảo trì Kich cỡ"
                             x:Name="btnKCMaintain"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Top"
                             Height="100" Width="200"
-                            Margin="80, 40" FontSize="20"
-                            Click="btnKCMaintain_Click"/>
+                            Margin="0,40,80,0" FontSize="20"
+                            Click="btnKCMaintain_Click" Grid.Column="2"/>
                     <Button x:Name="btnCTQTTMaintain"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Bottom"
                             Height="100" Width="200"
-                            Margin="80, 40" FontSize="20"
+                            Margin="80,0,0,40" FontSize="20"
                             Click="btnCTQTTMaintain_Click">
                         <TextBlock Text="Bảo trì Chi tiết quân tư trang"
                                    TextWrapping="Wrap"
@@ -61,8 +66,8 @@
                             HorizontalAlignment="Right"
                             VerticalAlignment="Bottom"
                             Height="100" Width="200"
-                            Margin="80, 40" FontSize="20"
-                            Click="btnKHMaintain_Click"/>
+                            Margin="0,0,80,40" FontSize="20"
+                            Click="btnKHMaintain_Click" Grid.Column="2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Quản lý mượn">
@@ -130,7 +135,32 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Thống kê">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid x:Name="ThongKe" Background="#FFE5E5E5" Loaded="ThongKe_Loaded">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="14*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="272*"/>
+                        <ColumnDefinition Width="170*"/>
+                        <ColumnDefinition Width="319*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Thống kê theo" HorizontalAlignment="Left" Margin="80,49,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                    <ComboBox x:Name="myComboBox" HorizontalAlignment="Left" Margin="190,53,0,0" VerticalAlignment="Top" Width="242" Grid.ColumnSpan="2" SelectionChanged="ComboBox_SelectionChanged" Grid.Column="2" >
+                    </ComboBox>
+                    <DataGrid x:Name="myDataGrid" HorizontalAlignment="Left" Height="369" Margin="80,103,0,0" VerticalAlignment="Top" Width="566" Grid.ColumnSpan="3" Grid.Column="2" SelectionChanged="DataGrid_SelectionChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mã Quân tư trang"
+                                    Binding="{Binding MaQtt}"/>
+                <DataGridTextColumn Header="Tên Quân tư trang"
+                                    Binding="{Binding TenQtt}"/>
+                <DataGridTextColumn Header="Đơn giá"
+                                    Binding="{Binding GiaTien}"/>
+                <DataGridTextColumn Header="Số lượng"
+                                    Binding="{Binding SoLuong}"/>
+                <DataGridTextColumn Header="Mô tả"
+                                    Binding="{Binding MoTa}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
             </TabItem>
             <TabItem Header="Danh sách hóa đơn">
                 <Grid Background="#FFE5E5E5">

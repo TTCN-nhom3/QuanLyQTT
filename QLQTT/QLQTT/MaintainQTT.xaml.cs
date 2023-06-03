@@ -103,5 +103,10 @@ namespace QLQTT
         {
             this.Close();
         }
+
+        private void dtgQTT_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

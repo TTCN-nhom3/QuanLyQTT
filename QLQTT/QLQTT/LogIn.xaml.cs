@@ -28,6 +28,9 @@ namespace QLQTT
 
         private void btnLogIn_Click(object sender, RoutedEventArgs e)
         {
+            var a = new MainAdmin();
+            a.Show();
+            this.Close();
             var query = db.SinhVien.SingleOrDefault(t => t.MaSv.Equals(txtName.Text));
             if (query == null && txtName.Text != "ad")
             {
@@ -41,8 +44,8 @@ namespace QLQTT
                 }
                 else
                 {
-                    var a = new MainAdmin();
-                    a.Show();
+                    var x = new MainAdmin();
+                    x.Show();
                     this.Close();
                     MessageBox.Show("Đăng nhập thành công!");
                 }
