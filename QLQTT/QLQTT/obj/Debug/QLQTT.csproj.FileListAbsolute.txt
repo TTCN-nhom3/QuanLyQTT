@@ -313,3 +313,4 @@ C:\Users\ducdu\OneDrive\Documents\TTCN@\QuanLyQTT\QLQTT\QLQTT\obj\Debug\QLQTT.cs
 C:\Users\ducdu\OneDrive\Documents\TTCN@\QuanLyQTT\QLQTT\QLQTT\obj\Debug\QLQTT.csproj.CopyComplete
 C:\Users\ducdu\OneDrive\Documents\TTCN@\QuanLyQTT\QLQTT\QLQTT\obj\Debug\QLQTT.exe
 C:\Users\ducdu\OneDrive\Documents\TTCN@\QuanLyQTT\QLQTT\QLQTT\obj\Debug\QLQTT.pdb
+C:\Users\ducdu\OneDrive\Documents\TTCN@\QuanLyQTT\QLQTT\QLQTT\obj\Debug\GeneratedInternalTypeHelper.g.cs

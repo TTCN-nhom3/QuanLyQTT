@@ -18,6 +18,7 @@ using CheckBox = System.Windows.Controls.CheckBox;
 //using MessageBox = System.Windows.Forms.MessageBox;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
 using MessageBox = System.Windows.MessageBox;
+using Binding = System.Windows.Data.Binding;
 
 namespace QLQTT
 {
@@ -30,7 +31,8 @@ namespace QLQTT
         List<string> comboboxThongKeItems = new List<string> {
     "Quân tư trang còn trong kho",
     "Quân tư trang đang được mượn",
-    "Quân tư trang đã quá hạn trả"
+    "Quân tư trang đã quá hạn trả",
+    "Khoản nợ của sinh viên"
 };
 
         public MainAdmin()
@@ -79,35 +81,74 @@ namespace QLQTT
         // Chọn thống kê
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            //myDataGrid.ItemsSource = null;
-            // Kiểm tra giá trị đã chọn trong ComboBox
             string selectedValue = myComboBox.SelectedItem as string;
-            IQueryable<QuanTuTrang> listItem = null;
+            //IQueryable<QuanTuTrang> listItem = null;
             if (selectedValue == "Quân tư trang còn trong kho")
             {
-                listItem = db.QuanTuTrang.Select(x => x);
+                var result = from a in db.QuanTuTrang
+                             join b in db.ChiTietQtt on a.MaQtt equals b.MaQtt
+                             join c in db.KichCo on b.MaKc equals c.MaKc
+                             select new
+                             {
+                                 MaQtt = a.MaQtt,
+                                 TenQtt = a.TenQtt,
+                                 TenKc = c.TenKc,
+                                 SoLuongCT = b.SoLuongCt
+                             };
+                var listItem = result.Select(x => x);
+                myDataGrid.ItemsSource = listItem.ToList();
             }
             else if (selectedValue == "Quân tư trang đang được mượn")
             {
-                listItem = db.QuanTuTrang
-                    .Join(db.DangMuon, x => x.MaQtt, y => y.MaQtt, (x, y) => x);
+                var result = from a in db.QuanTuTrang
+                             join b in db.ChiTietQtt on a.MaQtt equals b.MaQtt
+                             join c in db.DangMuon on  new {b.MaQtt, b.MaKc } equals new {c.MaQtt, c.MaKc }
+                             join d in db.SinhVien on c.MaSv equals d.MaSv
+                             join f in db.KichCo on b.MaKc equals f.MaKc
+                             select new
+                             {
+                                 TenSv = d.TenSv,
+                                 MaQtt = a.MaQtt,
+                                 TenQtt = a.TenQtt,
+                                 TenKc = f.TenKc,
+                             };
+                var listItem = result.Select(x => x);
+                myDataGrid.ItemsSource = listItem.ToList();
             }
             else if (selectedValue == "Quân tư trang đã quá hạn trả")
             {
-                listItem = db.QuanTuTrang
-               .Join(db.Muon, qtt => qtt.MaQtt, muon => muon.MaQtt, (qtt, muon) => new { QuanTuTrang = qtt, Muon = muon })
-               .Join(db.SinhVien, qm => qm.Muon.MaSv, sv => sv.MaSv, (qm, sv) => new { QuanTuTrang = qm.QuanTuTrang, SinhVien = sv })
-               .Join(db.KhoaHoc, qms => qms.SinhVien.MaKh, kh => kh.MaKh, (qms, kh) => new { QuanTuTrang = qms.QuanTuTrang, KhoaHoc = kh })
-               .Where(qms => qms.KhoaHoc.NgayKt < DateTime.Now)
-               .Select(qms => qms.QuanTuTrang);
-
+                var result = from a in db.QuanTuTrang
+                             join b in db.ChiTietQtt on a.MaQtt equals b.MaQtt
+                             join c in db.DangMuon on new { b.MaQtt, b.MaKc } equals new { c.MaQtt, c.MaKc }
+                             join d in db.SinhVien on c.MaSv equals d.MaSv
+                             join f in db.KichCo on b.MaKc equals f.MaKc
+                             join g in db.KhoaHoc on d.MaKh equals g.MaKh
+                             where g.NgayKt < DateTime.Now
+                             select new
+                             {
+                                 TenSv = d.TenSv,
+                                 MaQtt = a.MaQtt,
+                                 TenQtt = a.TenQtt,
+                                 TenKc = f.TenKc,
+                                 NgayKt = g.NgayKt
+                             };
+                var listItem = result.Select(x => x);
+                myDataGrid.ItemsSource = listItem.ToList();
+            } else if( selectedValue == "Khoản nợ của sinh viên")
+            {
+                var result = from a in db.SinhVien
+                            join b in db.CongNo on a.MaSv equals b.MaSv
+                             select new
+                             {
+                                 MaSv = a.MaSv,
+                                 TenSv = a.TenSv,
+                                 SoTien = b.SoTien,
+                                 HanTra = b.HanTra
+                             };
+                var listItem = result.Select(x => x);
+                myDataGrid.ItemsSource = listItem.ToList();
             }
-            myDataGrid.ItemsSource = listItem.ToList();
-
-
         }
-
         private void ThongKe_Loaded(object sender, RoutedEventArgs e)
         {
             myComboBox.ItemsSource = comboboxThongKeItems;
@@ -136,42 +177,47 @@ namespace QLQTT
         {
             var selectedRows = new List<DataGridRow>();
             var searchMaSV = searchBox.Text;
-            MessageBoxResult messageBoxResult = MessageBox.Show(
-                        "Xác nhận trả quân tư trang này", "Xác nhận", MessageBoxButton.YesNo);
-            if (messageBoxResult == MessageBoxResult.Yes)
+           
+            foreach (var item in myDataGrid1.Items)
             {
-                foreach (var item in myDataGrid1.Items)
-                {
-                    var row = myDataGrid1.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
-                    var checkBox = FindVisualChild<CheckBox>(row);
+                var row = myDataGrid1.ItemContainerGenerator.ContainerFromItem(item) as DataGridRow;
+                var checkBox = FindVisualChild<CheckBox>(row);
 
-                    if (checkBox.IsChecked == true)
-                    {
-                        selectedRows.Add(row);
-                    }
-                }
-
-                foreach (var row in selectedRows)
+                if (checkBox.IsChecked == true)
                 {
-                    DangMuon a = row.Item as DangMuon;
-                    var DMQTT = db.DangMuon
-                        .SingleOrDefault(x => x.MaQtt  == a.MaQtt && x.MaSv == searchMaSV && x.MaKc == a.MaKc);
-                    if (DMQTT != null)
-                    {
-                        db.DangMuon.Remove(DMQTT);
-                        db.SaveChanges();
-                    }
-                    var ct = db.ChiTietQtt.SingleOrDefault(x => x.MaQtt == a.MaQtt && x.MaKc == a.MaKc);
-                    if (ct != null)
-                    {
-                        ct.SoLuongCt += 1;
-                        db.SaveChanges();
-                    }
+                    selectedRows.Add(row);
                 }
-                MessageBox.Show("Trả quân tư trang thành công", "Thông báo");
             }
-            myDataGrid1.ItemsSource = db.DangMuon.Where(x => x.MaSv == searchMaSV).Select(x => x).ToList();
+            if(selectedRows.Count() > 0)
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show(
+                       "Xác nhận trả quân tư trang này", "Xác nhận", MessageBoxButton.YesNo);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
 
+                    foreach (var row in selectedRows)
+                    {
+                        DangMuon a = row.Item as DangMuon;
+                        var DMQTT = db.DangMuon
+                            .SingleOrDefault(x => x.MaQtt == a.MaQtt && x.MaSv == searchMaSV && x.MaKc == a.MaKc);
+                        if (DMQTT != null)
+                        {
+                            db.DangMuon.Remove(DMQTT);
+                            db.SaveChanges();
+                        }
+                        var ct = db.ChiTietQtt.SingleOrDefault(x => x.MaQtt == a.MaQtt && x.MaKc == a.MaKc);
+                        if (ct != null)
+                        {
+                            ct.SoLuongCt += 1;
+                            var qtt = db.QuanTuTrang.SingleOrDefault(x => x.MaQtt == ct.MaQtt);
+                            qtt.SoLuong += 1;
+                            db.SaveChanges();
+                        }
+                    }
+                    MessageBox.Show("Trả quân tư trang thành công", "Thông báo");
+                }
+                myDataGrid1.ItemsSource = db.DangMuon.Where(x => x.MaSv == searchMaSV).Select(x => x).ToList();
+            }
         }
         public static T FindVisualChild<T>(DependencyObject parent) where T : DependencyObject
         {
