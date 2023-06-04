@@ -31,7 +31,9 @@ namespace QLQTT.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-LRK3UC2;Initial Catalog=QLQTT;Integrated Security=True");
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-LRK3UC2;Initial Catalog=QLQTT;Integrated Security=True")
+                .EnableSensitiveDataLogging();
+                base.OnConfiguring(optionsBuilder);
             }
         }
 

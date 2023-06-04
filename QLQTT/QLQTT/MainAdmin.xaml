@@ -106,11 +106,15 @@
             <TabItem Header="Quản lý trả">
                 <Grid Background="#FFE5E5E5">
                     <Grid Background="#FFE5E5E5">
-                        <TextBox HorizontalAlignment="Left" Margin="198,51,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                        <Button Content="Tìm kiếm" HorizontalAlignment="Left" Margin="445,50,0,0" 
-                                VerticalAlignment="Top"/>
-                        <DataGrid Margin="50,97,50,140"/>
-                        <Button Content="Xác nhận" HorizontalAlignment="Center" Margin="0,301,0,0" VerticalAlignment="Top" Height="31" Width="86"/>
+                        <TextBox x:Name="searchBox" HorizontalAlignment="Left" Margin="320,56,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                        <Button x:Name="search" Content="Tìm kiếm" HorizontalAlignment="Left" Margin="455,55,0,0" 
+                                VerticalAlignment="Top" Click="search_Click"/>
+                        <DataGrid x:Name="myDataGrid1" Margin="50,97,50,140">
+                            <DataGrid.Columns>
+                                <DataGridCheckBoxColumn CanUserResize="False" ClipboardContentBinding="{x:Null}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Button Content="Xác nhận" HorizontalAlignment="Center" Margin="0,301,0,0" VerticalAlignment="Top" Height="31" Width="86" Click="Button_Click"/>
                     </Grid>
                 </Grid>
             </TabItem>
@@ -139,25 +143,16 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="14*"/>
                         <ColumnDefinition Width="20*"/>
-                        <ColumnDefinition Width="272*"/>
+                        <ColumnDefinition Width="227*"/>
+                        <ColumnDefinition Width="44*"/>
                         <ColumnDefinition Width="170*"/>
                         <ColumnDefinition Width="319*"/>
                     </Grid.ColumnDefinitions>
                     <Label Content="Thống kê theo" HorizontalAlignment="Left" Margin="80,49,0,0" VerticalAlignment="Top" Grid.Column="2"/>
-                    <ComboBox x:Name="myComboBox" HorizontalAlignment="Left" Margin="190,53,0,0" VerticalAlignment="Top" Width="242" Grid.ColumnSpan="2" SelectionChanged="ComboBox_SelectionChanged" Grid.Column="2" >
+                    <ComboBox x:Name="myComboBox" HorizontalAlignment="Left" Margin="190,53,0,0" VerticalAlignment="Top" Width="242" Grid.ColumnSpan="3" SelectionChanged="ComboBox_SelectionChanged" Grid.Column="2" >
                     </ComboBox>
-                    <DataGrid x:Name="myDataGrid" HorizontalAlignment="Left" Height="369" Margin="80,103,0,0" VerticalAlignment="Top" Width="566" Grid.ColumnSpan="3" Grid.Column="2" SelectionChanged="DataGrid_SelectionChanged">
+                    <DataGrid x:Name="myDataGrid" HorizontalAlignment="Left" Height="369" Margin="80,103,0,0" VerticalAlignment="Top" Width="566" Grid.ColumnSpan="4" Grid.Column="2" SelectionChanged="DataGrid_SelectionChanged">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Mã Quân tư trang"
-                                    Binding="{Binding MaQtt}"/>
-                <DataGridTextColumn Header="Tên Quân tư trang"
-                                    Binding="{Binding TenQtt}"/>
-                <DataGridTextColumn Header="Đơn giá"
-                                    Binding="{Binding GiaTien}"/>
-                <DataGridTextColumn Header="Số lượng"
-                                    Binding="{Binding SoLuong}"/>
-                <DataGridTextColumn Header="Mô tả"
-                                    Binding="{Binding MoTa}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
