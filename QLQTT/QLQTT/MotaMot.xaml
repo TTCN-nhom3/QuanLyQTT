@@ -1,0 +1,26 @@
+﻿<Window x:Class="QLQTT.MotaMot"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QLQTT"
+        mc:Ignorable="d"
+        Title="Thêm mô tả" Height="280" Width="400"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label Content="Thêm mô tả (không bắt buộc)"
+               HorizontalAlignment="Left"
+               Margin="25,30,0,0"
+               VerticalAlignment="Top"/>
+        <TextBox x:Name="tbMoTa" Margin="25,64,25,70"
+                 TextWrapping="Wrap"/>
+        <Button x:Name="btnXacNhan"
+                Content="Xác nhận"
+                HorizontalAlignment="Center"
+                Margin="0,0,0,20"
+                VerticalAlignment="Bottom"
+                Width="100" Height="30"
+                Click="btnXacNhan_Click"/>
+
+    </Grid>
+</Window>
