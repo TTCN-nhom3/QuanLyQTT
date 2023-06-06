@@ -25,6 +25,7 @@ namespace QLQTT
         public MaintainSize()
         {
             InitializeComponent();
+            lblExitWarning.Content = "Nếu bạn nhất nút 'X' màu đỏ, ứng dụng sẽ tắt ngay lập tức!";
         }
         // Sinh mã Kích cỡ mới
         public string newKC()
@@ -49,9 +50,7 @@ namespace QLQTT
             AddAndUpdateSize addAndUpdateSize = new AddAndUpdateSize(
                 "Thêm mới Kích cỡ", newKC());
             this.Hide();
-            addAndUpdateSize.ShowDialog();
-            dtgKC_Load(sender, e);
-            this.ShowDialog();
+            addAndUpdateSize.Show();
         }
         // Nhấn nút "Xóa"
         private void btnDeleteKC_Click(object sender, RoutedEventArgs e)
@@ -97,14 +96,33 @@ namespace QLQTT
             AddAndUpdateSize addAndUpdateSize = new AddAndUpdateSize(
                 "Cập nhật thông tin Quân tư trang", k.MaKc, k.TenKc, k.MoTa);
             this.Hide();
-            addAndUpdateSize.ShowDialog();
-            dtgKC_Load(sender, e);
-            this.ShowDialog();
+            addAndUpdateSize.Show();
         }
         // Nhấn nút "Thoát"
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            MainAdmin mainAdmin = new MainAdmin();
             this.Close();
+            mainAdmin.Show();
+        }
+        // Nhấn nút "Tìm kiếm"
+        private void btnApply_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtTenKC.Text == "" || txtTenKC.Text == null)
+            {
+                dtgKC_Load(sender, e);
+            }
+            else
+            {
+                var l = db.KichCo.Where(q => q.TenKc.Contains(txtTenKC.Text));
+                dtgKC.ItemsSource = l.ToList();
+            }
+        }
+        // Nhấn nút "Tải lại"
+        private void btnCancelApply_Click(object sender, RoutedEventArgs e)
+        {
+            txtTenKC.Text = "";
+            dtgKC_Load(sender, e);
         }
     }
 }

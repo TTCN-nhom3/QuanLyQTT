@@ -17,5 +17,17 @@ namespace QLQTT.Models
         public virtual KichCo MaKcNavigation { get; set; }
         public virtual QuanTuTrang MaQttNavigation { get; set; }
         public virtual SinhVien MaSvNavigation { get; set; }
+        public Muon(string maMuon, string maSv, string maQtt, string maKc, DateTime ngayDk, DateTime? ngayMuon, string moTa)
+        {
+            MaMuon = maMuon;
+            MaSv = maSv;
+            MaQtt = maQtt;
+            MaKc = maKc;
+            NgayDk = ngayDk;
+            NgayMuon = ngayMuon;
+
+            MoTa = moTa;
+
+        }
     }
 }

@@ -20,11 +20,11 @@ namespace QLQTT
     public partial class ActionDetail : Window
     {
         string actionType, actionId, sId, sName, cStart, cFinish, 
-            qttId, qttName, kId, kName, createDate, actionDate;
+            qttId, qttName, kId, kName, createDate, actionDate, actionState;
 
         public ActionDetail(string actionType, string actionId, string sId, string sName,
             string cStart, string cFinish, string qttId, string qttName, string kId,
-            string kName, string createDate, string actionDate)
+            string kName, string createDate, string actionDate, string actionState)
         {
             InitializeComponent();
             this.actionType = actionType;
@@ -39,11 +39,12 @@ namespace QLQTT
             this.kName = kName;
             this.createDate = createDate;
             this.actionDate = actionDate;
+            this.actionState = actionState;
         }
 
         private void start_Loaded(object sender, RoutedEventArgs e)
         {
-            lblType.Content = "Phiếu " + actionType.ToLower();
+            lblType.Content = "Đơn đăng ký " + actionType.ToLower();
             lblIdTitle.Content = "Mã " + actionType.ToLower();
             lblId.Content = actionId;
             lblSName.Content = sName;
@@ -57,6 +58,7 @@ namespace QLQTT
             lblcreateDate.Content = createDate;
             lblactionDateTitle.Content = "Ngày " + actionType.ToLower();
             lblactionDate.Content = actionDate;
+            lblStatus.Content = actionState;
         }
     }
 }

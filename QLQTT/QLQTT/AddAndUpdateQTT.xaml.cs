@@ -162,5 +162,12 @@ namespace QLQTT
                 this.Close();
             }
         }
+        // Hiển thị MaintainQTT khi đóng cửa sổ này
+        private void Win_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MaintainQTT maintainQTT = new MaintainQTT();
+            maintainQTT.Show();
+        }
+
     }
 }

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QLQTT"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Title="AddAndUpdateQTT" Height="500" Width="525"
-        MinHeight="500" MinWidth="525">
+        MinHeight="500" MinWidth="525" Closing="Win_Closing">
     <Grid Height="450" Width="500"
           Loaded="start_Loaded">
         <Label x:Name="lblTitle" FontSize="24"

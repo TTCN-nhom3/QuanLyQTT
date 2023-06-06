@@ -25,12 +25,9 @@ namespace QLQTT
         {
             InitializeComponent();
         }
-
+        // Nhấn nút "Đăng nhập"
         private void btnLogIn_Click(object sender, RoutedEventArgs e)
         {
-            var a = new MainAdmin();
-            a.Show();
-            this.Close();
             var query = db.SinhVien.SingleOrDefault(t => t.MaSv.Equals(txtName.Text));
             if (query == null && txtName.Text != "ad")
             {
@@ -38,14 +35,14 @@ namespace QLQTT
             }
             else if (txtName.Text == "ad")
             {
-                if (txtPW.Text != "123")
+                if (txtPW.Password != "123")
                 {
                     MessageBox.Show("Sai mật khẩu!");
                 }
                 else
                 {
-                    var x = new MainAdmin();
-                    x.Show();
+                    var a = new MainAdmin();
+                    a.Show();
                     this.Close();
                     MessageBox.Show("Đăng nhập thành công!");
                 }
@@ -53,7 +50,7 @@ namespace QLQTT
             else
             {
                 var sv = db.SinhVien.SingleOrDefault(t => t.MaSv.Equals(txtName.Text) &&
-                t.MatKhau.Equals(txtPW.Text));
+                t.MatKhau.Equals(txtPW.Password));
                 if (sv != null)
                 {
                     var s = new MainStudent(txtName.Text);
@@ -67,22 +64,10 @@ namespace QLQTT
                 }
             }
         }
-
-        private void btnTest_Click(object sender, RoutedEventArgs e)
-        {
-            string id = "QTT0000007";
-            var muon = db.Muon.SingleOrDefault(m => m.MaQtt.Equals(id));
-            var doi = db.Doi.SingleOrDefault(d => d.MaQtt.Equals(id));
-            var mat = db.Mat.SingleOrDefault(m => m.MaQtt.Equals(id));
-            var dangmuon = db.DangMuon.SingleOrDefault(d => d.MaQtt.Equals(id));
-            if (muon != null || doi != null || mat != null || dangmuon != null)
-            {
-                txtTest.Text = "yes";
-            }
-            else
-            {
-                txtTest.Text = "no";
-            }
-        }
+        //private void btnTest_Click(object sender, RoutedEventArgs e)
+        //{
+        //    test t = new test();
+        //    t.Show();
+        //}
     }
 }

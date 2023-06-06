@@ -148,5 +148,12 @@ namespace QLQTT
                 this.Close();
             }
         }
+        // Hiển thị MaintainSize khi đóng cửa sổ này
+        private void Win_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MaintainSize maintainSize = new MaintainSize();
+            maintainSize.Show();
+        }
+
     }
 }

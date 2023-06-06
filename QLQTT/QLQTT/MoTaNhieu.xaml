@@ -1,0 +1,67 @@
+﻿<Window x:Class="QLQTT.MoTaNhieu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QLQTT"
+        mc:Ignorable="d"
+        Title="MoTaNhieu" Height="400" Width="750"
+        WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label Content="Thêm mô tả (không bắt buộc)"
+               HorizontalAlignment="Left"
+               Margin="10,10,0,0" FontSize="14"
+               VerticalAlignment="Top"/>
+        <DataGrid x:Name="dtgMuon1" IsReadOnly="True"
+                  Margin="10,50,10,80"
+                  SelectionChanged="DataGrid_SelectionChanged"
+                  Loaded="dtgMuon1_Loaded"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserReorderColumns="False"
+                  CanUserResizeRows="False"
+                  CanUserResizeColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Mã Mượn"
+                                    Binding="{Binding MaMuon}"/>
+                <DataGridTextColumn Header="Mã sinh viên"
+                                    Binding="{Binding MaSv}"/>
+                <DataGridTextColumn Header="Quân tư trang"
+                                    Binding="{Binding TenQtt}"/>
+                <DataGridTextColumn Header="Kích cỡ"
+                                    Binding="{Binding TenKC}"/>
+                <DataGridTextColumn Header="Ngày đăng ký"
+                                    Binding="{Binding NgayDk,
+                    StringFormat={}{0:dd/MM/yyyy}}"/>
+                <DataGridTextColumn Header="Trạng Thái"
+                                    Binding="{Binding TrangThai}"/>
+                <DataGridTextColumn Header="Mô Tả"
+                                    Binding="{Binding MoTa}"/>
+            </DataGrid.Columns>
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                </Style>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background"
+                                                        Value="Transparent" />
+                            <Setter Property="Foreground"
+                                                        Value="Black" />
+                            <Setter Property="BorderBrush"
+                                                        Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
+        </DataGrid>
+        <Button x:Name="btnXacNhan" Content="Xác nhận"
+                HorizontalAlignment="Center"
+                Margin="0,0,0,20" FontSize="14"
+                VerticalAlignment="Bottom"
+                Width="100" Height="30"
+                Click="btnXacNhan_Click"/>
+    </Grid>
+</Window>

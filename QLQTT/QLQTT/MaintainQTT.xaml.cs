@@ -25,6 +25,7 @@ namespace QLQTT
         public MaintainQTT()
         {
             InitializeComponent();
+            lblExitWarning.Content = "Nếu bạn nhất nút 'X' màu đỏ, ứng dụng sẽ tắt ngay lập tức!";
         }
         // Sinh mã Quân tư trang mới
         public string newQTT()
@@ -48,10 +49,8 @@ namespace QLQTT
         {
             AddAndUpdateQTT addAndUpdateQTT = new AddAndUpdateQTT(
                 "Thêm mới Quân tư trang", newQTT());
-            this.Hide();
-            addAndUpdateQTT.ShowDialog();
-            dtgQTT_Load(sender, e);
-            this.ShowDialog();
+            this.Close();
+            addAndUpdateQTT.Show();
         }
         // Nhấn nút "Xóa"
         private void btnDeleteQTT_Click(object sender, RoutedEventArgs e)
@@ -93,20 +92,34 @@ namespace QLQTT
             QuanTuTrang q = (QuanTuTrang)dtgQTT.SelectedItem;
             AddAndUpdateQTT addAndUpdateQTT = new AddAndUpdateQTT(
                 "Cập nhật thông tin Quân tư trang", q.MaQtt, q.TenQtt, q.GiaTien, q.MoTa);
-            this.Hide();
-            addAndUpdateQTT.ShowDialog();
-            dtgQTT_Load(sender, e);
-            this.ShowDialog();
+            this.Close();
+            addAndUpdateQTT.Show();
         }
         // Nhấn nút "Thoát"
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            MainAdmin mainAdmin = new MainAdmin();
             this.Close();
+            mainAdmin.Show();
         }
-
-        private void dtgQTT_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        // Nhán nút "Tìm kiếm"
+        private void btnApply_Click(object sender, RoutedEventArgs e)
         {
-
+            if(txtTenQTT.Text == "" || txtTenQTT.Text == null)
+            {
+                dtgQTT_Load(sender, e);
+            }
+            else
+            {
+                var l = db.QuanTuTrang.Where(q => q.TenQtt.Contains(txtTenQTT.Text));
+                dtgQTT.ItemsSource = l.ToList();
+            }
+        }
+        // Nhấn nút "Tải lại"
+        private void btnCancelApply_Click(object sender, RoutedEventArgs e)
+        {
+            txtTenQTT.Text = "";
+            dtgQTT_Load(sender, e);
         }
     }
 }

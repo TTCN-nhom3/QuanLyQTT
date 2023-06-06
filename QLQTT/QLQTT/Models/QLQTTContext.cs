@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Windows;
+using System.Windows.Media;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -29,10 +31,11 @@ namespace QLQTT.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            //optionsBuilder.EnableSensitiveDataLogging();
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=DESKTOP-LRK3UC2;Initial Catalog=QLQTT;Integrated Security=True")
-                .EnableSensitiveDataLogging();
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer("Data Source=DESKTOP-M75UEQH\\SQLEXPRESS;Initial Catalog=QLQTT;Integrated Security=True").EnableSensitiveDataLogging();
                 base.OnConfiguring(optionsBuilder);
             }
         }

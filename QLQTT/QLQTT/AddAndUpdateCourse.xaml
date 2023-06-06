@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:QLQTT"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
         Title="AddAndUpdateCourse" Height="500" Width="525"
-        MinHeight="500" MinWidth="525">
+        MinHeight="500" MinWidth="525" Closing="Win_Closing">
     <Grid Loaded="start_Loaded"
           Height="450" Width="500">
         <Label x:Name="lblTitle" FontSize="24"

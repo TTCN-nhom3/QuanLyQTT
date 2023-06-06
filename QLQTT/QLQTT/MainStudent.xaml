@@ -12,20 +12,26 @@
                VerticalAlignment="Top" Margin="10, 10, 0, 0"
                Height="80" Width="80"/>
         <Label HorizontalAlignment="Left" VerticalAlignment="Top"
-               FontSize="14" Margin="140, 10, 0, 0" x:Name="lblName"
+               FontSize="14" Margin="140,10,0,0" x:Name="lblName"
                FontWeight="Bold"/>
         <Label HorizontalAlignment="Left" VerticalAlignment="Top"
-               FontSize="14" Margin="140, 50, 0, 0" x:Name="lblId"
+               FontSize="14" Margin="140,50,0,0" x:Name="lblId"
                FontWeight="Bold"/>
         <Label HorizontalAlignment="Right" VerticalAlignment="Top"
-               FontSize="14" Margin="0, 30, 140, 0" x:Name="lblMoney"
-               Foreground="Red" FontWeight="Bold"/>
+               FontSize="14" Margin="0,10,120,0" x:Name="lblMoney"
+               Foreground="Red" FontWeight="Bold" Width="200"/>
+        <Label HorizontalAlignment="Right" VerticalAlignment="Top"
+               FontSize="14" Margin="0,50,120,0" x:Name="lblDate"
+               Foreground="Red" FontWeight="Bold" Width="200"/>
         <Button x:Name="btnLogOut" HorizontalAlignment="Right"
-                Content="Đăng xuất" Padding="5 5 5 5" FontSize="14"
-                VerticalAlignment="Top" Margin="0, 30, 10, 0"
+                Content="Đăng xuất" Padding="5" FontSize="14"
+                VerticalAlignment="Top" Margin="0,10,10,0"
                 Click="btnLogOut_Click"/>
+        <Label x:Name="lblExitWarning" HorizontalAlignment="Center"
+               VerticalAlignment="Top" FontSize="12"
+               Foreground="Red" Margin="0,30,0,0"/>
         <TabControl Margin="10,100,10,10">
-            <TabItem Header="Đăng ký Quân tư trang">
+            <TabItem Header="Đăng ký quân tư trang">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="0.5*"/>
@@ -33,62 +39,130 @@
                     </Grid.RowDefinitions>
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.7*"/>
-                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="0.6*"/>
+                            <ColumnDefinition Width="0.4*"/>
                         </Grid.ColumnDefinitions>
-                        <ListView x:Name="lvwDK" Grid.Column="0"
-                                  Margin="0, 5, 0, 0"
-                              Loaded="lvwDK_Loaded">
-                            <ListView.ItemContainerStyle>
-                                <Style TargetType="{x:Type ListViewItem}">
-                                    <Setter Property="BorderBrush"
-                                            Value="LightGray"/>
-                                    <Setter Property="BorderThickness"
-                                            Value="0,0,0,1"/>
-                                    <Setter Property="Foreground"
-                                            Value="Black"/>
+                        <DataGrid x:Name="dtgDK"
+                                  AutoGenerateColumns="False"
+                                  Margin="10"
+                                  Loaded="dtgDK_Loaded"
+                                  Grid.Column="0"
+                                  CanUserAddRows="False"
+                                  CanUserDeleteRows="False"
+                                  CanUserReorderColumns="False"
+                                  CanUserResizeRows="False"
+                                  CanUserResizeColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Quân tư trang" 
+                                                    Binding="{Binding qtt.TenQtt}"
+                                                    IsReadOnly="True"/>
+                                <DataGridTemplateColumn Header="Chọn">
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding isChecked, 
+                                                    UpdateSourceTrigger=PropertyChanged}"
+                                                          HorizontalAlignment="Center"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                            <DataGrid.Resources>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
                                 </Style>
-                            </ListView.ItemContainerStyle>
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="Mã Kích cỡ"
-                                                    DisplayMemberBinding="{Binding MaKc}"/>
-                                    <GridViewColumn Header="Tên Kích cỡ"
-                                                    DisplayMemberBinding="{Binding TenKc}"/>
-                                    <GridViewColumn Header="Mô tả" 
-                                                    DisplayMemberBinding="{Binding MoTa}"/>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                        <Label Content="Chọn Kích cỡ:" Grid.Column="1"  
-                               Margin="10, 10, 0, 0"
+                                <Style TargetType="DataGridCell">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background"
+                                                        Value="Transparent" />
+                                            <Setter Property="Foreground"
+                                                        Value="Black" />
+                                            <Setter Property="BorderBrush"
+                                                        Value="Transparent"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.Resources>
+                        </DataGrid>
+                        <Label Content="Chọn kích cỡ:"
+                               Margin="25,10" FontSize="14"
+                               VerticalAlignment="Top"
                                HorizontalAlignment="Left"
-                               VerticalAlignment="Top" FontSize="14"/>
-                        <ComboBox x:Name="cbbKC" Grid.Column="1"
-                                  Margin="110, 10, 0, 0" FontSize="14"
-                                  VerticalAlignment="Top" Loaded="cbbKC_Loaded"
-                                  Width="110"  HorizontalAlignment="Left"/>
+                               Grid.Column="1"/>
+                        <ComboBox x:Name="cbbKC" Loaded="cbbKC_Loaded"
+                                  SelectionChanged="cbbKC_SelectionChanged"
+                                  HorizontalAlignment="Right"
+                                  VerticalAlignment="Top" Grid.Column="1"
+                                  Margin="25,10" Width="120"
+                                  FontSize="14"/>
+                        <Label FontSize="14" Content="Mô tả:" 
+                           HorizontalAlignment="Left" 
+                           Margin="25,60" Grid.Column="1"
+                           VerticalAlignment="Top"/>
+                        <TextBlock x:Name="txbl_mota" FontSize="14"
+                               Grid.Column="1" HorizontalAlignment="Left"
+                               Margin="100,65" TextWrapping="Wrap"
+                               VerticalAlignment="Top" Width="170"
+                               Text="abc"/>
                         <Button x:Name="btnDK" Content="Đăng ký"
-                                Padding="5, 5, 5, 5" HorizontalAlignment="Center"
-                                VerticalAlignment="Bottom" Margin="0, 0, 0, 10"
-                                FontSize="14" Grid.Column="1"/>
+                                Padding="5" HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom" Grid.Column="1"
+                                Margin="0,0,0,20" Width="120"
+                                FontSize="14" Click="btnDK_Click"/>
                     </Grid>
-                    <Label HorizontalAlignment="Center" VerticalAlignment="Top"
-                           Grid.Row="1" Content="Đã đăng ký" FontSize="16"
-                           FontWeight="Bold"/>
-                    <DataGrid x:Name="dtgHDM" AutoGenerateColumns="False"
-                              Grid.Row="1" Margin="0, 40, 0, 0"
-                              CanUserAddRows="False">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Quân tư trang"
-                                                Binding="{Binding TenQtt}"/>
-                            <DataGridTextColumn Header="Kích cỡ"
-                                                Binding="{Binding TenKc}"/>
-                            <DataGridTextColumn Header="Ngày đăng ký"
-                                                Binding="{Binding NgayTao, 
-                                StringFormat={}{0:dd/MM/yyyy}}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.6*"/>
+                            <ColumnDefinition Width="0.4*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label HorizontalAlignment="Center"
+                               VerticalAlignment="Top" Margin="5"
+                               Grid.Column="0" Content="Đang xử lý "
+                               FontSize="18" FontWeight="Bold"/>
+                        <DataGrid x:Name="dtg_processing"
+                                  Grid.Column="0"
+                                  AutoGenerateColumns="False"
+                                  Margin="10,40,10,10"
+                                  Loaded="dtg_processing_Loaded"
+                                  CanUserAddRows="False"
+                                  CanUserDeleteRows="False"
+                                  CanUserReorderColumns="False"
+                                  CanUserResizeRows="False"
+                                  CanUserResizeColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Tên QTT"
+                                                    Binding="{Binding TenQtt}"
+                                                    IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Tên KC"
+                                                    Binding="{Binding TenKc}"
+                                                    IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Ngày ĐK"
+                                                    Binding="{Binding NgayDk,
+                                    StringFormat={}{0:dd/MM/yyyy}}"
+                                                    IsReadOnly="True"/>
+                                <DataGridTextColumn Header="Loại"
+                                                    Binding="{Binding Loai}"
+                                                    IsReadOnly="True"/>
+                            </DataGrid.Columns>
+                            <DataGrid.Resources>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                </Style>
+                            </DataGrid.Resources>
+                        </DataGrid>
+                        <Button Content="Xóa hết" x:Name="btn_delAll"
+                                HorizontalAlignment="Center"
+                                Margin="0,0,150,0" Padding="5"
+                                VerticalAlignment="Center"
+                                Click="delAll_Click"
+                                Width="120" Grid.Column="1"/>
+                        <Button Content="Xóa mục đã chọn" x:Name="btn_delOptinally"
+                                HorizontalAlignment="Center"
+                                Margin="150,0,0,0" Padding="5"
+                                VerticalAlignment="Center"
+                                Click="delOp_Click"
+                                Width="120" Grid.Column="1"/>
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem x:Name="tabDS" Header="Danh sách Quân tư trang"
@@ -104,15 +178,23 @@
                             <ColumnDefinition Width="0.4*"/>
                         </Grid.ColumnDefinitions>
                         <Grid Grid.Column="0">
-                            <DataGrid x:Name="dtgBorrowing" AutoGenerateColumns="False"
-                                      Margin="0, 5, 0, 0" CanUserAddRows="False"
-                                      Loaded="dtgBorrowing_Loaded" Height="160"
-                                      VerticalAlignment="Top">
+                            <DataGrid x:Name="dtgBorrowing"
+                                      AutoGenerateColumns="False"
+                                      Margin="10" Height="160"
+                                      CanUserAddRows="False"
+                                      Loaded="dtgBorrowing_Loaded"
+                                      VerticalAlignment="Top"
+                                      CanUserDeleteRows="False"
+                                      CanUserResizeRows="False"
+                                      CanUserResizeColumns="False"
+                                      CanUserReorderColumns="False">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Header="Quân tư trang" 
-                                                        Binding="{Binding qtt.TenQtt}"/>
+                                                        Binding="{Binding qtt.TenQtt}"
+                                                        IsReadOnly="True"/>
                                     <DataGridTextColumn Header="Kích cỡ" 
-                                                        Binding="{Binding kc.TenKc}"/>
+                                                        Binding="{Binding kc.TenKc}"
+                                                        IsReadOnly="True"/>
                                     <DataGridTemplateColumn Header="Chọn">
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
@@ -125,7 +207,10 @@
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
                                 </DataGrid.Columns>
-                                <DataGrid.CellStyle>
+                                <DataGrid.Resources>
+                                    <Style TargetType="DataGridColumnHeader">
+                                        <Setter Property="HorizontalContentAlignment" Value="Center" />
+                                    </Style>
                                     <Style TargetType="DataGridCell">
                                         <Style.Triggers>
                                             <Trigger Property="IsSelected" Value="True">
@@ -138,7 +223,7 @@
                                             </Trigger>
                                         </Style.Triggers>
                                     </Style>
-                                </DataGrid.CellStyle>
+                                </DataGrid.Resources>
                             </DataGrid>
                             <TextBlock x:Name="txtWarning" HorizontalAlignment="Center"
                                        FontSize="16" Foreground="Red"
@@ -165,13 +250,19 @@
                                 Margin="0, 100, 50, 0" FontSize="14"
                                 Click="btnDoi_Click"/>
                     </Grid>
-                    <Label HorizontalAlignment="Center" VerticalAlignment="Top"
-                           Grid.Row="1" Content="Đã mất" FontSize="16"
-                           FontWeight="Bold"/>
-                    <DataGrid Grid.Row="1" VerticalAlignment="Top"
-                              Height="140" Margin="0, 40, 0, 0"
+                    <Label HorizontalAlignment="Center" 
+                           VerticalAlignment="Top"
+                           Grid.Row="1" Content="Đã mất" 
+                           FontSize="18" FontWeight="Bold"/>
+                    <DataGrid Grid.Row="1" Margin="10, 40, 10, 10"
                               x:Name="dtgLoss" Loaded="dtgLoss_Load"
-                              AutoGenerateColumns="False" IsReadOnly="True">
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              CanUserDeleteRows="False"
+                              CanUserReorderColumns="False"
+                              CanUserResizeRows="False"
+                              CanUserResizeColumns="False"
+                              IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Quân tư trang" Binding="{Binding qtt}"/>
                             <DataGridTextColumn Header="Kích cỡ" Binding="{Binding kc}"/>
@@ -179,23 +270,54 @@
                                 StringFormat={}{0:dd/MM/yyyy}}"/>
                             <DataGridTextColumn Header="Số tiền" Binding="{Binding value}"/>
                         </DataGrid.Columns>
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background"
+                                                        Value="Transparent" />
+                                        <Setter Property="Foreground"
+                                                        Value="Black" />
+                                        <Setter Property="BorderBrush"
+                                                        Value="Transparent"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
                     </DataGrid>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="tabGD" Header="Lịch sử giao dịch">
+            <TabItem x:Name="tabGD" Header="Đơn đăng ký đã được xử lý">
                 <Grid>
-                    <DataGrid x:Name="dtgHD" AutoGenerateColumns="False"
-                              CanUserAddRows="False" Loaded="dtgHD_Loaded">
+                    <Label Content="Danh sách các đơn đăng ký đã được xử lý"
+                       FontSize="18" FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top" Margin="0,20,0,0"/>
+                    <DataGrid x:Name="dtgHD"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              Loaded="dtgHD_Loaded"
+                              CanUserDeleteRows="False"
+                              CanUserReorderColumns="False"
+                              CanUserResizeRows="False"
+                              CanUserResizeColumns="False"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Margin="10,80,10,10">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Giao dịch" 
-                                                Binding="{Binding GiaoDich}"/>
+                            <DataGridTextColumn Header="Loại đơn" 
+                                                Binding="{Binding GiaoDich}"
+                                                IsReadOnly="True"/>
                             <DataGridTextColumn Header="Quân tư trang" 
-                                                Binding="{Binding TenQtt}"/>
+                                                Binding="{Binding TenQtt}"
+                                                IsReadOnly="True"/>
                             <DataGridTextColumn Header="Kích cỡ" 
-                                                Binding="{Binding TenKc}"/>
+                                                Binding="{Binding TenKc}"
+                                                IsReadOnly="True"/>
                             <DataGridTextColumn Header="Ngày giao dịch" 
                                                 Binding="{Binding NgayGiaoDich, 
-                                StringFormat={}{0:dd/MM/yyyy}}"/>
+                                StringFormat={}{0:dd/MM/yyyy}}"
+                                                IsReadOnly="True"/>
                             <DataGridTemplateColumn Header="Chi tiết">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
@@ -206,7 +328,81 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
+                        <DataGrid.Resources>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            </Style>
+                            <Style TargetType="DataGridCell">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background"
+                                                        Value="Transparent" />
+                                        <Setter Property="Foreground"
+                                                        Value="Black" />
+                                        <Setter Property="BorderBrush"
+                                                        Value="Transparent"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.Resources>
                     </DataGrid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Lịch sử thanh toán">
+                <Grid>
+                    <Label Content="Danh sách các hóa đơn thanh toán"
+                       FontSize="18" FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Top" Margin="0,20,0,0"/>
+                    <DataGrid x:Name="dtgHDTT"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              Loaded="dtgHDTT_Loaded"
+                              CanUserDeleteRows="False"
+                              CanUserReorderColumns="False"
+                              CanUserResizeRows="False"
+                              CanUserResizeColumns="False"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Margin="10,80,10,60"
+                              IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Mã hóa đơn" 
+                                                Binding="{Binding MaHdtt}"/>
+                            <DataGridTextColumn Header="Số tiền" 
+                                                Binding="{Binding SoTien}"/>
+                            <DataGridTextColumn Header="Ngày thanh toán" 
+                                                Binding="{Binding NgayTra,
+                                StringFormat={}{0:dd/MM/yyyy}}"/>
+                        </DataGrid.Columns>
+                        <DataGrid.Resources>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            </Style>
+                            <Style TargetType="DataGridCell">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background"
+                                                        Value="Transparent" />
+                                        <Setter Property="Foreground"
+                                                        Value="Black" />
+                                        <Setter Property="BorderBrush"
+                                                        Value="Transparent"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.Resources>
+                    </DataGrid>
+                    <Label x:Name="lblTotalValue"
+                           Foreground="Red" FontSize="12"
+                           VerticalAlignment="Bottom"
+                           HorizontalAlignment="Center"
+                           Margin="0,0,250,10"/>
+                    <Label x:Name="lblTotalPay"
+                           Foreground="Red" FontSize="12"
+                           VerticalAlignment="Bottom"
+                           HorizontalAlignment="Center"
+                           Margin="250,0,0,10"/>
                 </Grid>
             </TabItem>
         </TabControl>

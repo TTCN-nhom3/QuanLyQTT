@@ -81,7 +81,7 @@ namespace QLQTT
                     MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
-
+        // Nhấn nút "Hủy bỏ"
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult message = MessageBox.Show("Bạn chắc chắn chọn " + kc.TenKc + "?",

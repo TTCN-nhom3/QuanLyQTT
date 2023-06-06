@@ -56,13 +56,13 @@
                VerticalAlignment="Top" FontSize="14"
                Foreground="Red"/>
         <Button x:Name="btnSubmit" Content="Chọn"
-                Padding="5, 5, 5, 5" Margin="0, 0, 200, 10"
+                Padding="5, 5, 5, 5" Margin="0, 0, 200, 20"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom" Width="100"
                 FontSize="14" Grid.Row="1"
                 Click="btnSubmit_Click"/>
         <Button x:Name="btnCancel" Content="Hủy bỏ"
-                Padding="5, 5, 5, 5" Margin="200, 0, 0, 10"
+                Padding="5, 5, 5, 5" Margin="200, 0, 0, 20"
                 HorizontalAlignment="Center"
                 VerticalAlignment="Bottom" Width="100"
                 FontSize="14" Grid.Row="1"

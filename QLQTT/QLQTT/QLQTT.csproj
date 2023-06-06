@@ -183,8 +183,28 @@
     <Compile Include="MaintainSize.xaml.cs">
       <DependentUpon>MaintainSize.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\CTQTT.cs" />
+    <Compile Include="Models\DoiViewModel.cs" />
+    <Compile Include="Models\ListAction.cs" />
+    <Compile Include="Models\MuonViewModel.cs" />
+    <Compile Include="Models\ProcessingBor.cs" />
+    <Compile Include="MotaMot.xaml.cs">
+      <DependentUpon>MotaMot.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MotaMot_Doi.xaml.cs">
+      <DependentUpon>MotaMot_Doi.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MoTaNhieu.xaml.cs">
+      <DependentUpon>MoTaNhieu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MoTaNhieu_Doi.xaml.cs">
+      <DependentUpon>MoTaNhieu_Doi.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SelectSizeForChangeAction.xaml.cs">
       <DependentUpon>SelectSizeForChangeAction.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="test.xaml.cs">
+      <DependentUpon>test.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -286,7 +306,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="MotaMot.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MotaMot_Doi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MoTaNhieu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MoTaNhieu_Doi.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="SelectSizeForChangeAction.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="test.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

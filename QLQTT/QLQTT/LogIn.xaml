@@ -21,17 +21,17 @@
         <Label Content="Password:" HorizontalAlignment="Left"
                VerticalAlignment="Top" FontSize="20"
                Margin="20, 140, 0, 0"/>
-        <TextBox x:Name="txtPW"  HorizontalAlignment="Right"
+        <PasswordBox x:Name="txtPW"  HorizontalAlignment="Right"
                  Width="220" VerticalAlignment="Top"
                  FontSize="20" Margin="0, 140, 20, 0"/>
         <Button x:Name="btnLogIn" HorizontalAlignment="Center"
                 Content="Đăng nhập" Padding="5 5 5 5" 
                 FontSize="20" VerticalAlignment="Bottom"
                 Margin="0, 0, 0, 50" Click="btnLogIn_Click"/>
-        <Button x:Name="btnTest" HorizontalAlignment="Left"
+        <!--<Button x:Name="btnTest" HorizontalAlignment="Left"
                 Content="Test" Padding="5 5 5 5" 
                 FontSize="20" VerticalAlignment="Bottom"
-                Margin="10, 50" Click="btnTest_Click"/>
+                Margin="10, 50" Click="btnTest_Click"/>-->
         <TextBlock x:Name="txtTest" VerticalAlignment="Bottom"
                    HorizontalAlignment="Center" Margin="10"/>
     </Grid>

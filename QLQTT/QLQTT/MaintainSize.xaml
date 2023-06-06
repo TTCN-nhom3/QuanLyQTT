@@ -5,21 +5,43 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QLQTT"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen"
-        Title="MaintainSize" MinHeight="500" MinWidth="600"
-        Height="500" Width="600">
-    <Grid Height="450" Width="500">
+        Title="MaintainSize" MinHeight="550" MinWidth="650"
+        Height="550" Width="650">
+    <Grid Height="500" Width="600">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*"/>
-            <RowDefinition Height="0.6*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.125*"/>
+            <RowDefinition Height="0.125*"/>
+            <RowDefinition Height="0.45*"/>
             <RowDefinition Height="0.2*"/>
         </Grid.RowDefinitions>
         <Label Content="Bảo trì Kích cỡ" Grid.Row="0"
                FontSize="24" HorizontalAlignment="Center"
                FontWeight="Bold" VerticalAlignment="Center"/>
+        <Label Content="Tên Kích cỡ:" Grid.Row="1" Height="35"
+               FontSize="16" Width="140" VerticalAlignment="Center"
+               HorizontalAlignment="Left" Margin="10,0,0,0"/>
+        <TextBox x:Name="txtTenKC" Grid.Row="1" Height="35"
+                 FontSize="16" Width="140" VerticalAlignment="Center"
+                 HorizontalAlignment="Left" Margin="150,0,0,0"
+                 VerticalContentAlignment="Center"/>
+        <Button x:Name="btnApply" Content="Tìm kiếm" Grid.Row="2"
+                FontSize="16" VerticalAlignment="Center" Padding="5"
+                HorizontalAlignment="Center" Margin="0,0,250,0"
+                Width="100" Click="btnApply_Click"/>
+        <Button x:Name="btnCancelApply" Content="Tải lại" Grid.Row="2"
+                FontSize="16" VerticalAlignment="Center" Padding="5"
+                HorizontalAlignment="Center" Margin="250,0,0,0"
+                Width="100" Click="btnCancelApply_Click"/>
         <DataGrid AutoGenerateColumns="False"
                   VerticalAlignment="Stretch" x:Name="dtgKC"
                   CanUserAddRows="False" Loaded="dtgKC_Load"
-                  Grid.Row="1" HorizontalAlignment="Stretch">
+                  Grid.Row="3" HorizontalAlignment="Stretch"
+                  CanUserDeleteRows="False"
+                  CanUserReorderColumns="False"
+                  CanUserResizeRows="False"
+                  CanUserResizeColumns="False"
+                  IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Mã Kích cỡ"
                                     Binding="{Binding MaKc}"/>
@@ -38,22 +60,45 @@
                 <DataGridTemplateColumn Header="Xóa">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Xóa" x:Name="btnDeleteKC"
-                                    Click="btnDeleteKC_Click"/>
+                            <Button Content="Xóa"
+                                    x:Name="btnDeleteKC"
+                                    Click="btnDeleteKC_Click"
+                                    Foreground="Red"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="HorizontalContentAlignment" Value="Center" />
+                </Style>
+                <Style TargetType="DataGridCell">
+                    <Style.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter Property="Background"
+                                                        Value="Transparent" />
+                            <Setter Property="Foreground"
+                                                        Value="Black" />
+                            <Setter Property="BorderBrush"
+                                                        Value="Transparent"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
         </DataGrid>
         <Button Content="Thêm mới" HorizontalAlignment="Center"
-                Margin="0,0,250,0" VerticalAlignment="Center"
+                Margin="0,10,250,0" VerticalAlignment="Top"
                 FontSize="14" Width="100" x:Name="btnAddKC"
                 Height="40"  Click="btnAddKC_Click"
-                Grid.Row="2"/>
+                Grid.Row="4"/>
         <Button Content="Thoát" HorizontalAlignment="Center"
-                Margin="250,0,0,0" VerticalAlignment="Center"
+                Margin="250,10,0,0" VerticalAlignment="Top"
                 FontSize="14" Width="100" x:Name="btnCancel"
                 Height="40" Click="btnCancel_Click"
-                Grid.Row="2"/>
+                Grid.Row="4"/>
+        <Label x:Name="lblExitWarning" Foreground="Red"
+               FontSize="12" HorizontalAlignment="Center"
+               VerticalAlignment="Top" Grid.Row="4"
+               Margin="0,60,0,0"/>
     </Grid>
 </Window>

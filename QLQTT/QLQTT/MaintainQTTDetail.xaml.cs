@@ -25,6 +25,7 @@ namespace QLQTT
         public MainTainQTTDetail()
         {
             InitializeComponent();
+            lblExitWarning.Content = "Nếu bạn nhất nút 'X' màu đỏ, ứng dụng sẽ tắt ngay lập tức!";
         }
         //Hiển thị danh sách các Chi tiết Quân tư trang
         private void dtgQTTDetail_Load(object sender, RoutedEventArgs e)
@@ -34,9 +35,11 @@ namespace QLQTT
                             join k in db.KichCo on c.MaKc equals k.MaKc
                             select new
                             {
-                                c,
+                                MaQtt = c.MaQtt,
+                                MaKc = c.MaKc,
                                 qtt = q.TenQtt,
                                 kc = k.TenKc,
+                                c.SoLuongCt
                             };
             dtgQTTDetail.ItemsSource = listCTQTT.ToList();
         }
@@ -45,10 +48,8 @@ namespace QLQTT
         {
             AddAndUpdateQTTDetail addAndUpdateQTTDetail = new AddAndUpdateQTTDetail(
                 "Thêm mới Chi tiết Quân tư trang");
-            this.Hide();
-            addAndUpdateQTTDetail.ShowDialog();
-            dtgQTTDetail_Load(sender, e);
-            this.ShowDialog();
+            this.Close();
+            addAndUpdateQTTDetail.Show();
         }
         // Nhấn nút "Xóa"
         private void btnDeleteQTTDetail_Click(object sender, RoutedEventArgs e)
@@ -71,7 +72,7 @@ namespace QLQTT
             else
             {
                 MessageBoxResult messageBoxResult = MessageBox.Show(
-                    "Bạn có chắc chắn muốn loại bỏ Kích cỡ '" + k + 
+                    "Bạn có chắc chắn muốn loại bỏ Kích cỡ '" + k +
                     "' đối với Quân tư trang '" + q + "'?", "Xác nhận",
                     MessageBoxButton.YesNo);
                 if (messageBoxResult == MessageBoxResult.Yes)
@@ -92,15 +93,97 @@ namespace QLQTT
             ChiTietQtt c = (ChiTietQtt)dtgQTTDetail.SelectedItem;
             AddAndUpdateQTTDetail addAndUpdateQTTDetail = new AddAndUpdateQTTDetail(
                 "Cập nhật thông tin Chi tiết Quân tư trang", c.MaQtt, c.MaKc, c.SoLuongCt);
-            this.Hide();
-            addAndUpdateQTTDetail.ShowDialog();
-            dtgQTTDetail_Load(sender, e);
-            this.ShowDialog();
+            this.Close();
+            addAndUpdateQTTDetail.Show();
         }
         // Nhấn nút "Thoát"
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
+            MainAdmin mainAdmin = new MainAdmin();
             this.Close();
+            mainAdmin.Show();
+        }
+        // Nhấn nút "Tìm kiếm"
+        private void btnApply_Click(object sender, RoutedEventArgs e)
+        {
+            bool q = false, k = false;
+            List<CTQTT> lQTT = new List<CTQTT>();
+            List<CTQTT> lKC = new List<CTQTT>();
+            if (txtTenQTT.Text != "" || txtTenQTT.Text != null)
+            {
+                var l = from c in db.ChiTietQtt
+                        join qtt in db.QuanTuTrang on c.MaQtt equals qtt.MaQtt
+                        join kc in db.KichCo on c.MaKc equals kc.MaKc
+                        where qtt.TenQtt.Contains(txtTenQTT.Text)
+                        select new
+                        {
+                            qtt,
+                            kc,
+                            c.SoLuongCt
+                        };
+                foreach (var i in l)
+                {
+                    lQTT.Add(new CTQTT(i.qtt, i.kc, i.SoLuongCt));
+                }
+                q = true;
+            }
+            if (txtTenKC.Text != "" || txtTenKC.Text != null)
+            {
+                var l = from c in db.ChiTietQtt
+                        join qtt in db.QuanTuTrang on c.MaQtt equals qtt.MaQtt
+                        join kc in db.KichCo on c.MaKc equals kc.MaKc
+                        where kc.TenKc.Contains(txtTenKC.Text)
+                        select new
+                        {
+                            qtt,
+                            kc,
+                            c.SoLuongCt
+                        };
+                foreach (var i in l)
+                {
+                    lKC.Add(new CTQTT(i.qtt, i.kc, i.SoLuongCt));
+                }
+                k = true;
+            }
+            if (q && k)
+            {
+                var l = lQTT.Select(x => new
+                {
+                    x.qtt.MaQtt,
+                    qtt = x.qtt.TenQtt,
+                    x.kc.MaKc,
+                    kc = x.kc.TenKc,
+                    x.SoLuongCt
+
+                }).Intersect(lKC.Select(x => new
+                {
+                    x.qtt.MaQtt,
+                    qtt = x.qtt.TenQtt,
+                    x.kc.MaKc,
+                    kc = x.kc.TenKc,
+                    x.SoLuongCt
+                }));
+                dtgQTTDetail.ItemsSource = l.ToList();
+            }
+            else if (q)
+            {
+                dtgQTTDetail.ItemsSource = lQTT;
+            }
+            else if (k)
+            {
+                dtgQTTDetail.ItemsSource = lKC;
+            }
+            else
+            {
+                dtgQTTDetail_Load(sender, e);
+            }
+        }
+        // Nhấn nút "Tải lại"
+        private void btnCancelApply_Click(object sender, RoutedEventArgs e)
+        {
+            txtTenQTT.Text = "";
+            txtTenKC.Text = "";
+            dtgQTTDetail_Load(sender, e);
         }
     }
 }

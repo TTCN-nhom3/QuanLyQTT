@@ -171,5 +171,11 @@ namespace QLQTT
                 this.Close();
             }
         }
+        // Hiển thị MaintainCourse khi đóng của số này
+        private void Win_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MaintainCourse maintainCourse = new MaintainCourse();
+            maintainCourse.Show();
+        }
     }
 }
